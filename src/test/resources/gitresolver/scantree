@@ -1,0 +1,4 @@
+#SET base src/test/resources/gitresolver
+#SET tree ${base}/tree
+LOG Scanning tree: ${tree}
+FOR FILE file IN ${tree} file:${base}/logfile

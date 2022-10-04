@@ -1,0 +1,3 @@
+#SET file file:src/test/resources/gitresolver/file.toresolve
+LOG Resolving file: ${file}
+RESOLVE ${file} resolved/file.resolved
