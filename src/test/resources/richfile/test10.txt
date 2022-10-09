@@ -1,5 +1,0 @@
-#SET var1 x
-#SET var2 y
-#IF ${var1}y = x${var2}
-yes
-#END

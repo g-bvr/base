@@ -1,3 +1,0 @@
-#SET var1 ab${var2}c
-#SET var2 xyz
-Test ${var1}

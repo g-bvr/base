@@ -1,7 +1,0 @@
-#SET FLAG yes
-#IF ${FLAG}
-   #SET VAR value1
-#ELSE
-   #SET VAR value2
-#END
-${VAR}

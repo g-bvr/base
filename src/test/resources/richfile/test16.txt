@@ -1,2 +1,0 @@
-#INCLUDE common/resource-service-resources
-${MEMORY}

@@ -1,3 +1,0 @@
-Resolve:
-Value of VARABC: xyz
-DONE

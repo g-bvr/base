@@ -1,3 +1,0 @@
-#IF ${tag1}
-   only if tag1 is set
-#END
