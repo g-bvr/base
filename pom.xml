@@ -16,6 +16,11 @@
     <dependencies>
         <dependency>
             <groupId>org.jkube</groupId>
+            <artifactId>git-beaver</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jkube</groupId>
             <artifactId>java-base</artifactId>
             <version>${jkube.version}</version>
         </dependency>
