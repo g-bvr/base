@@ -15,7 +15,8 @@ public class BasePlugin implements Plugin {
         return List.of(
                 new AppendCommand(),
                 new CopyCommand(),
-                new ForCommand()
+                new ForCommand(),
+                new SettingsCommand()
         );
     }
 
