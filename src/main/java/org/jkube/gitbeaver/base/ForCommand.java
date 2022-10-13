@@ -9,6 +9,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static org.jkube.logging.Log.onException;
 
@@ -34,6 +35,7 @@ public class ForCommand extends AbstractCommand {
             expectArg(3, "MATCHING", arguments);
             pattern = arguments.get(4);
         }
+        Pattern regex = createRegex(pattern);
         expectArg(num-2, "DO", arguments);
         String script = arguments.get(num-1) + GitBeaver.BEAVER_EXTENSION;
         File file = workSpace.getAbsolutePath(filename).toFile();
@@ -44,19 +46,19 @@ public class ForCommand extends AbstractCommand {
             File[] files = file.listFiles();
             if (files != null) {
                 for (File f : files) {
-                    items.add(workSpace.getRelativePath(f.toPath()).toString());
+                    if (regex.matcher(f.toPath().getFileName().toString()).matches()) {
+                        items.add(workSpace.getRelativePath(f.toPath()).toString());
+                    }
                 }
             }
             Collections.sort(items);
         } else {
             items = onException(() -> Files.readAllLines(file.toPath())).fail("could not load lines of file "+file);
+            items = items.stream().filter(item -> regex.matcher(item).matches()).collect(Collectors.toList());
         }
-        Pattern regex = createRegex(pattern);
         for (String item : items) {
-            if (regex.matcher(item).matches()) {
-                variables.put(variable, item);
-                GitBeaver.scriptExecutor().execute(script, item, variables, workSpace);
-            }
+            variables.put(variable, item);
+            GitBeaver.scriptExecutor().execute(script, item, variables, workSpace);
         }
         variables.remove(variable);
     }
