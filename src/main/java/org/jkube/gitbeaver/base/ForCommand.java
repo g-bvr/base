@@ -3,6 +3,7 @@ package org.jkube.gitbeaver.base;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
+import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.io.File;
@@ -47,7 +48,10 @@ public class ForCommand extends AbstractCommand {
             if (files != null) {
                 for (File f : files) {
                     if (regex.matcher(f.toPath().getFileName().toString()).matches()) {
+                        Log.log("Using file {}", f);
                         items.add(workSpace.getRelativePath(f.toPath()).toString());
+                    } else {
+                        Log.log("Skipping file {}", f);
                     }
                 }
             }
