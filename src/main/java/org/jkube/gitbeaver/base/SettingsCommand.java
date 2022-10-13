@@ -4,6 +4,7 @@ import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.FileUtil;
+import org.jkube.logging.Log;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,6 +28,7 @@ public class SettingsCommand extends AbstractCommand {
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
         Path path = workSpace.getAbsolutePath(arguments.get(0));
         List<String> lines = onException(() -> Files.readAllLines(path)).fail("could not load lines of file " + path);
+        Log.log("Read {} settings from {}", lines.size(), path);
         lines.forEach(line -> addVariable(line, variables));
     }
 
