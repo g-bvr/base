@@ -33,7 +33,7 @@ public class SettingsCommand extends AbstractCommand {
     }
 
     private void addVariable(String line, Map<String, String> variables) {
-        String[] split = line.split(" ");
+        String[] split = line.trim().split(" ", 2);
         variables.put(split[0], split.length == 2 ? split[1] : "");
     }
 }
