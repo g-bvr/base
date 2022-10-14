@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver.base;
 
+import org.jkube.gitbeaver.command.LogCommand;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.interfaces.Plugin;
 
@@ -16,6 +17,7 @@ public class BasePlugin implements Plugin {
                 new AppendCommand(),
                 new CopyCommand(),
                 new ForCommand(),
+                new DebugCommand(),
                 new SettingsCommand()
         );
     }
