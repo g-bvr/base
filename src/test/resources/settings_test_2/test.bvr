@@ -1,3 +1,0 @@
-PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
-SETTINGS input/table-1/row-1
-APPEND output/file ${GitUrl}/${RepoName} ${Tag}

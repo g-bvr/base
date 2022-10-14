@@ -1,5 +1,0 @@
-GitUrl https://github.com
-RepoName git-beaver-file-resolver
-Tag main
-SourcePath src/main/java
-MainClass org.jkube.gitbeaver.ResolverPlugin

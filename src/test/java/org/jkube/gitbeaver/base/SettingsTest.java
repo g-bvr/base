@@ -25,11 +25,6 @@ public class SettingsTest extends GitBeaverAbstractTest {
         runTest(Path.of(TEST_PATH_PREFIX+1));
     }
 
-    @Test
-    void settingsTest2() {
-        runTest(Path.of(TEST_PATH_PREFIX+2));
-    }
-
     @AfterEach
     void afterEachTest() { TestUtil.assertNoFailures(); }
 
