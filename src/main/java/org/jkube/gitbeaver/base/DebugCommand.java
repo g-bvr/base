@@ -1,6 +1,7 @@
 package org.jkube.gitbeaver.base;
 
 import org.jkube.gitbeaver.AbstractCommand;
+import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.logging.Log;
 
@@ -19,6 +20,7 @@ import static org.jkube.logging.Log.onException;
 public class DebugCommand extends AbstractCommand {
 
     private static final String DEFAULT_OPTIONS = "V";
+    private static final String OPTION_SUBSTITUTED_LINE = "S";
     private static final String OPTION_LINE = "L";
     private static final String OPTION_LINE_NUM = "N";
     private static final String OPTION_VARIABLES = "V";
@@ -35,14 +37,27 @@ public class DebugCommand extends AbstractCommand {
         if (options.contains(OPTION_VARIABLES)) {
             logVariables(variables);
         }
+        if (options.contains(OPTION_LINE)) {
+            logLine("Previous code line (before variable substitution):", GitBeaver.scriptExecutor().getPreviousLine());
+        }
+        if (options.contains(OPTION_SUBSTITUTED_LINE)) {
+            logLine("Previous code line (afteer variable substitution):", GitBeaver.scriptExecutor().getPreviousSubstitutedLine());
+        }
     }
 
     private void logVariables(Map<String, String> variables) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Variables:\n");
+        sb.append("Variables:");
         variables.forEach((k,v) -> {
-            sb.append("   ").append(k).append(": ").append(v).append("\n");
+            sb.append("\n   ").append(k).append(": ").append(v);
         });
+        Log.log(sb.toString());
+    }
+
+    private void logLine(String info, String line) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(info).append(":\n");
+        sb.append("   ").append(line);
         Log.log(sb.toString());
     }
 
