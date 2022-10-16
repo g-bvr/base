@@ -3,16 +3,17 @@ package org.jkube.gitbeaver.base;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
+import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.jkube.logging.Log.onException;
 
 /**
  * Usage:
@@ -21,7 +22,7 @@ import static org.jkube.logging.Log.onException;
  */
 public class ForCommand extends AbstractCommand {
 
-    protected ForCommand() {
+    public ForCommand() {
         super(5, 7, "for");
     }
 
@@ -57,8 +58,10 @@ public class ForCommand extends AbstractCommand {
             }
             Collections.sort(items);
         } else {
-            items = onException(() -> Files.readAllLines(file.toPath())).fail("could not load lines of file "+file);
-            items = items.stream().filter(item -> regex.matcher(item).matches()).collect(Collectors.toList());
+            items = FileUtil.readLines(file.toPath())
+                    .stream()
+                    .filter(item -> regex.matcher(item).matches())
+                    .collect(Collectors.toList());
         }
         for (String item : items) {
             variables.put(variable, item);

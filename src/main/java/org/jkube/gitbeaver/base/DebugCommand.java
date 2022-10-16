@@ -27,7 +27,7 @@ public class DebugCommand extends AbstractCommand {
     private static final String OPTION_CALL_STACK = "C";
     private static final String OPTION_WORKSPACE = "W";
 
-    protected DebugCommand() {
+    public DebugCommand() {
         super(0, 1, "debug");
     }
 
@@ -48,17 +48,15 @@ public class DebugCommand extends AbstractCommand {
     private void logVariables(Map<String, String> variables) {
         StringBuilder sb = new StringBuilder();
         sb.append("Variables:");
-        variables.forEach((k,v) -> {
-            sb.append("\n   ").append(k).append(": ").append(v);
-        });
+        variables.forEach((k,v) -> sb.append("\n   ").append(k).append(": ").append(v));
         Log.log(sb.toString());
     }
 
     private void logLine(String info, String line) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(info).append(":\n");
-        sb.append("   ").append(line);
-        Log.log(sb.toString());
+        Log.log(
+                info + ":\n"
+                + "   " + line
+        );
     }
 
 }

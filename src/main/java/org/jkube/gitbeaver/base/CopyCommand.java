@@ -24,7 +24,7 @@ import static org.jkube.logging.Log.onException;
  */
 public class CopyCommand extends SimpleCommand {
 
-    protected CopyCommand() {
+    public CopyCommand() {
         super(3, "copy");
     }
 

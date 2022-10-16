@@ -20,14 +20,14 @@ import static org.jkube.logging.Log.onException;
  */
 public class SettingsCommand extends AbstractCommand {
 
-    protected SettingsCommand() {
+    public SettingsCommand() {
         super(1, 1, "settings");
     }
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
         Path path = workSpace.getAbsolutePath(arguments.get(0));
-        List<String> lines = onException(() -> Files.readAllLines(path)).fail("could not load lines of file " + path);
+        List<String> lines = FileUtil.readLines(path);
         Log.log("Read {} settings from {}", lines.size(), path);
         lines.forEach(line -> addVariable(line, variables));
     }

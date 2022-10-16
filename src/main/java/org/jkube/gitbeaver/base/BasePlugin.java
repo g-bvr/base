@@ -3,26 +3,19 @@ package org.jkube.gitbeaver.base;
 import org.jkube.gitbeaver.command.LogCommand;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.interfaces.Plugin;
+import org.jkube.gitbeaver.plugin.SimplePlugin;
 
 import java.util.List;
 
-public class BasePlugin implements Plugin {
-    @Override
-    public void init() {
-    }
+public class BasePlugin extends SimplePlugin {
 
-    @Override
-    public List<Command> getCommands() {
-        return List.of(
-                new AppendCommand(),
-                new CopyCommand(),
-                new ForCommand(),
-                new DebugCommand(),
-                new SettingsCommand()
+    public BasePlugin() {
+        super(
+                AppendCommand.class,
+                CopyCommand.class,
+                ForCommand.class,
+                DebugCommand.class,
+                SettingsCommand.class
         );
-    }
-
-    @Override
-    public void shutdown() {
     }
 }

@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class AppendCommand extends AbstractCommand {
 
-    protected AppendCommand() {
+    public AppendCommand() {
         super(1, null, "append");
     }
 
