@@ -3,6 +3,7 @@ package org.jkube.gitbeaver.base;
 import org.jkube.application.Application;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.WorkSpace;
+import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.util.Expect;
 
 import java.io.File;
@@ -30,11 +31,8 @@ public class AppendCommand extends AbstractCommand {
         }
         File file = workSpace.getAbsolutePath(filename).toFile();
         Expect.isFalse(file.isDirectory()).elseFail("File is directory: "+file);
-        try (PrintWriter output = new PrintWriter(new FileWriter(file, true))) {
-            output.println(sb);
-        } catch (IOException e) {
-            Application.fail("could not append to file "+file);
-        }
+        FileUtil.append(sb.toString(), file);
     }
+
 
 }
