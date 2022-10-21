@@ -3,7 +3,7 @@ package org.jkube.gitbeaver.base;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
-import org.jkube.gitbeaver.interfaces.StepState;
+import org.jkube.gitbeaver.applicationlog.StepState;
 
 import java.util.List;
 import java.util.Map;
