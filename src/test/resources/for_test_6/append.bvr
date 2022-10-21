@@ -1,0 +1,3 @@
+SETTINGS ${file}
+LOG Appending ${variable} from ${file}
+APPEND output/result ${variable}
