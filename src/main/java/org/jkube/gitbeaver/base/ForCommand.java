@@ -39,7 +39,7 @@ public class ForCommand extends AbstractCommand {
         }
         Pattern regex = createRegex(pattern);
         expectArg(num-2, "DO", arguments);
-        String script = arguments.get(num-1) + GitBeaver.BEAVER_EXTENSION;
+        String script = arguments.get(num-1);
         File file = workSpace.getAbsolutePath(filename).toFile();
         Expect.isTrue(file.exists()).elseFail("File does not exist: "+file);
         List<String> items;
