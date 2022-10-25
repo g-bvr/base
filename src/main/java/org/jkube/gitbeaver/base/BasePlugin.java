@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver.base;
 
+import org.jkube.gitbeaver.base.command.*;
 import org.jkube.gitbeaver.plugin.SimplePlugin;
 
 public class BasePlugin extends SimplePlugin {
@@ -8,6 +9,7 @@ public class BasePlugin extends SimplePlugin {
         super(
                 AppendCommand.class,
                 CopyCommand.class,
+                ExecuteCommand.class,
                 ForCommand.class,
                 DebugCommand.class,
                 SettingsCommand.class,

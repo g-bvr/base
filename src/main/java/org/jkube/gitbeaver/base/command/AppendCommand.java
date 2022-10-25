@@ -1,4 +1,4 @@
-package org.jkube.gitbeaver.base;
+package org.jkube.gitbeaver.base.command;
 
 import org.jkube.application.Application;
 import org.jkube.gitbeaver.AbstractCommand;
