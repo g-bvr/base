@@ -29,8 +29,10 @@ public class ExecuteCommand extends AbstractCommand {
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
         String script = arguments.get(0);
-        WorkSpace subWorkspace = arguments.size() == 2 ? workSpace.getSubWorkspace(arguments.get(1)) : workSpace;
-        GitBeaver.scriptExecutor().execute(script, null, variables, subWorkspace);
+        WorkSpace executionWorkspace = arguments.size() == 2
+                ? workSpace.getSubWorkspace(arguments.get(1))
+                : workSpace;
+        GitBeaver.scriptExecutor().execute(script, null, variables, workSpace, executionWorkspace);
     }
 
 }
