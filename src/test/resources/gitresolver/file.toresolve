@@ -1,3 +1,0 @@
-#SET var1 Hello
-#SET var2 World!
-${var1} ${var2}
