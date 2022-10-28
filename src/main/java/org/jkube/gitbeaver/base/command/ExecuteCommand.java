@@ -34,7 +34,7 @@ public class ExecuteCommand extends AbstractCommand {
             expectNumArgs(3, arguments);
         }
         WorkSpace executionWorkspace = arguments.size() == 3
-                ? workSpace.getSubWorkspace(arguments.get(1))
+                ? workSpace.getSubWorkspace(arguments.get(2))
                 : workSpace;
         GitBeaver.scriptExecutor().execute(script, null, variables, workSpace, executionWorkspace);
     }
