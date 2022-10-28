@@ -23,13 +23,17 @@ import java.util.stream.Collectors;
 public class ExecuteCommand extends AbstractCommand {
 
     public ExecuteCommand() {
-        super(1, 2, "execute");
+        super(1, 3, "execute");
     }
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
         String script = arguments.get(0);
-        WorkSpace executionWorkspace = arguments.size() == 2
+        if (arguments.size() > 1) {
+            expectArg(1, "in", arguments);
+            expectNumArgs(3, arguments);
+        }
+        WorkSpace executionWorkspace = arguments.size() == 3
                 ? workSpace.getSubWorkspace(arguments.get(1))
                 : workSpace;
         GitBeaver.scriptExecutor().execute(script, null, variables, workSpace, executionWorkspace);
