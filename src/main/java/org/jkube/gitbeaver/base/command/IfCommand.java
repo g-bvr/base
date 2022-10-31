@@ -3,6 +3,7 @@ package org.jkube.gitbeaver.base.command;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
+import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class IfCommand extends AbstractCommand {
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        String variable = arguments.get(0);
+        String value = arguments.get(0);
         expectArg(1, "then", arguments);
         String thenScript = arguments.get(2);
         String elseScript;
@@ -35,8 +36,7 @@ public class IfCommand extends AbstractCommand {
         } else {
             elseScript = null;
         }
-        String value = variables.get(variable);
-        if ((value == null) || (value.equals("0") || value.equalsIgnoreCase(NO) || value.equalsIgnoreCase(FALSE))) {
+        if (value.equals("0") || value.equalsIgnoreCase(NO) || value.equalsIgnoreCase(FALSE)) {
             if (elseScript != null) {
                 GitBeaver.scriptExecutor().execute(elseScript, null, variables, workSpace, workSpace);
             }
