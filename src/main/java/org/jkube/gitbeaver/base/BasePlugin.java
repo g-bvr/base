@@ -12,6 +12,7 @@ public class BasePlugin extends SimplePlugin {
                 DebugCommand.class,
                 ExecuteCommand.class,
                 ForCommand.class,
+                GitSimulateCloneCommand.class,
                 IfCommand.class,
                 SettingsCommand.class,
                 StepStartCommand.class,
