@@ -8,6 +8,7 @@ public class BasePlugin extends SimplePlugin {
     public BasePlugin() {
         super(
                 AppendCommand.class,
+                AssembleCommand.class,
                 CopyCommand.class,
                 DebugCommand.class,
                 ExecuteCommand.class,
