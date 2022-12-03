@@ -63,11 +63,16 @@ public class ForCommand extends AbstractCommand {
                     .filter(item -> regex.matcher(item).matches())
                     .collect(Collectors.toList());
         }
+        String prevValue = variables.get(variable);
         for (String item : items) {
             variables.put(variable, item);
             GitBeaver.scriptExecutor().execute(script, item, variables, workSpace);
         }
-        variables.remove(variable);
+        if (prevValue == null) {
+            variables.remove(variable);
+        } else {
+            variables.put(variable, prevValue);
+        }
     }
 
     private Pattern createRegex(String pattern) {
