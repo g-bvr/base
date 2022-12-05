@@ -17,7 +17,11 @@ import java.util.Map;
 public class IfCommand extends AbstractCommand {
 
     private static final String NO = "no";
+    private static final String ZERO = "0";
     private static final String FALSE = "false";
+    private static final String THEN = "then";
+
+    private static final String ELSE = "else";
 
     public IfCommand() {
         super(3, 7, "if");
@@ -25,18 +29,21 @@ public class IfCommand extends AbstractCommand {
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        String value = arguments.get(0);
-        expectArg(1, "then", arguments);
+        String value = variables.get(arguments.get(0));
+        if (value != null) {
+            value = value.trim();
+        }
+        expectArg(1, THEN, arguments);
         String thenScript = arguments.get(2);
         String elseScript;
         if (arguments.size() > 3) {
             expectNumArgs(5, arguments);
-            expectArg(3, "else", arguments);
+            expectArg(3, ELSE, arguments);
             elseScript = arguments.get(4);
         } else {
             elseScript = null;
         }
-        if (value.equals("0") || value.equalsIgnoreCase(NO) || value.equalsIgnoreCase(FALSE)) {
+        if ((value == null) || value.isEmpty() || value.equals(ZERO) || value.equalsIgnoreCase(NO) || value.equalsIgnoreCase(FALSE)) {
             if (elseScript != null) {
                 GitBeaver.scriptExecutor().execute(elseScript, null, variables, workSpace, workSpace);
             }

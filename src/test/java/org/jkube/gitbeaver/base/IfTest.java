@@ -29,6 +29,15 @@ public class IfTest extends GitBeaverAbstractTest {
     @Test
     void ifTest3() { runTest(Path.of(TEST_PATH_PREFIX+3)); }
 
+    @Test
+    void ifTest4() { runTest(Path.of(TEST_PATH_PREFIX+4)); }
+
+    @Test
+    void ifTest5() { runTest(Path.of(TEST_PATH_PREFIX+5)); }
+
+    @Test
+    void ifTest6() { runTest(Path.of(TEST_PATH_PREFIX+6)); }
+
     @AfterEach
     void afterEachTest() { TestUtil.assertNoFailures(); }
 

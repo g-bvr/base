@@ -1,2 +1,3 @@
 PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
-IF false THEN thenScript ELSE elseScript
+SET var false
+IF var THEN thenScript ELSE elseScript
