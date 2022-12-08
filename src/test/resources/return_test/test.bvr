@@ -1,0 +1,3 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+EXECUTE subScript
+APPEND output/result ${RETURN_VALUE}
