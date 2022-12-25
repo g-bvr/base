@@ -18,10 +18,10 @@ import static org.jkube.logging.Log.onException;
 /**
  * Usage: git clone or pull providerUrl repositoryName [tag]
  */
-public class GitCloneOrPullCommand extends AbstractCommand {
+public class GitPullOrCloneCommand extends AbstractCommand {
 
-    public GitCloneOrPullCommand() {
-        super(2, 3, "git", "clone", "or", "pull");
+    public GitPullOrCloneCommand() {
+        super(2, 3, "git", "pull", "or", "clone");
     }
 
     @Override
