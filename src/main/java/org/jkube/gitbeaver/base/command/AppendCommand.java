@@ -1,16 +1,11 @@
 package org.jkube.gitbeaver.base.command;
 
-import org.jkube.application.Application;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.util.Expect;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import java.util.Map;
 
 import static org.jkube.gitbeaver.CommandParser.REST;

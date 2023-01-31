@@ -1,13 +1,11 @@
 package org.jkube.gitbeaver.base.command;
 
 import org.jkube.gitbeaver.AbstractCommand;
-import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.util.Expect;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 
 public class AssembleCommand extends AbstractCommand {

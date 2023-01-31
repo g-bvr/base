@@ -2,17 +2,11 @@ package org.jkube.gitbeaver.base.command;
 
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
-import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.logging.Log;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import static org.jkube.logging.Log.onException;
 
 public class DebugCommand extends AbstractCommand {
 

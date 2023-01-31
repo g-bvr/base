@@ -3,7 +3,6 @@ package org.jkube.gitbeaver.base.command;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
-import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
@@ -12,8 +11,6 @@ import java.io.File;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.jkube.gitbeaver.CommandParser.REST;
 
 public class ForCommand extends AbstractCommand {
 

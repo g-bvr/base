@@ -2,7 +2,6 @@ package org.jkube.gitbeaver.base.command;
 
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
-import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.applicationlog.CombinedApplicationLoggers;
 import org.jkube.gitbeaver.applicationlog.DefaultLogConsole;
@@ -11,7 +10,6 @@ import org.jkube.gitbeaver.util.ExternalProcess;
 
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 
 import static org.jkube.logging.Log.onException;

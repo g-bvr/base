@@ -2,11 +2,7 @@ package org.jkube.gitbeaver.base.command;
 
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.WorkSpace;
-import org.jkube.gitbeaver.util.FileUtil;
-import org.jkube.logging.Log;
 
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 
 import static org.jkube.gitbeaver.CommandParser.REST;
