@@ -10,11 +10,12 @@ import java.util.Map;
 public class StepEndCommand extends AbstractCommand {
 
     public StepEndCommand() {
-        super(0, 0, "step", "end");
+        super("Marks the end of a step block (for structured logging)");
+        commandline("STEP END");
     }
 
     @Override
-    public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
         GitBeaver.getApplicationLogger(variables).closeStep();
     }
 }

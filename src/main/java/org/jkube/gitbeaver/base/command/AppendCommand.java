@@ -13,26 +13,26 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import static org.jkube.gitbeaver.CommandParser.REST;
+
 public class AppendCommand extends AbstractCommand {
 
+    private static final String FILE = "file";
+
     public AppendCommand() {
-        super(1, null, "append");
+        super("Append a text to a file");
+        commandlineVariant("APPEND * TO "+FILE, "Append a text line to a file");
+        commandlineVariant("APPEND TO "+FILE, "Append an empty line to a file");
+        argument(FILE, "Path of file (relative to workspace) to be appended");
+        argument(REST, "String to be appended");
     }
 
     @Override
-    public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        String filename = arguments.get(0);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i < arguments.size(); i++) {
-            if (i > 1) {
-                sb.append(" ");
-            }
-            sb.append(arguments.get(i));
-        }
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        String filename = arguments.get(FILE);
         File file = workSpace.getAbsolutePath(filename).toFile();
         Expect.isFalse(file.isDirectory()).elseFail("File is directory: "+file);
-        FileUtil.append(sb.toString(), file);
+        FileUtil.append(arguments.get(REST), file);
     }
-
 
 }

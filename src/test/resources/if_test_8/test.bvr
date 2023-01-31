@@ -1,0 +1,4 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+SET condition true
+IF NOT condition EXECUTE notScript
+APPEND test done TO output/result

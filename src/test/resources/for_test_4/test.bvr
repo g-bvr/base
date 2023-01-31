@@ -1,2 +1,2 @@
 PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
-FOR line IN input/list MATCHING *line-* DO append
+FOR LINE line IN input/list MATCHING .*line-.* DO append

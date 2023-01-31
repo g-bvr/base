@@ -17,22 +17,29 @@ import java.util.regex.Pattern;
 
 import static org.jkube.logging.Log.onException;
 
-/**
- * Usage:
- *    FOR var IN path DO script
- *    FOR var IN path MATCHING pattern DO script
- */
-public class CopyCommand extends SimpleCommand {
+public class CopyCommand extends AbstractCommand {
+
+    private static final String SOURCE = "source";
+    private static final String TARGET = "target";
 
     public CopyCommand() {
-        super(3, "copy");
+        super( """
+            Copy a file or directory to another place. It is not allowed that source is a file and target
+            is an (already existing) directory. If target is an existing directory and the source is a
+            file, this file will be copied into a new file in tha tsrget directory with same filename.
+            If source is a directory and target is an already existing drectory, the contents of source are copied
+            to the target. If the target directory does not exist, yet, it will be created (including ancestors
+            if needed).
+            """);
+        commandline("COPY "+SOURCE+" TO "+TARGET);
+        argument(SOURCE, "Path of file or directory (relative to workspace) from which text lines are taken");
+        argument(TARGET, "Path of file (relative to workspace) to which text lines are appended");
     }
 
     @Override
-    protected void execute(WorkSpace workSpace, List<String> arguments) {
-        Path source = workSpace.getAbsolutePath(arguments.get(0));
-        expectArg(1, "TO", arguments);
-        Path target = workSpace.getAbsolutePath(arguments.get(2));
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        Path source = workSpace.getAbsolutePath(arguments.get(SOURCE));
+        Path target = workSpace.getAbsolutePath(arguments.get(TARGET));
         if (target.toFile().exists() && target.toFile().isDirectory() && !source.toFile().isDirectory()) {
             target = target.resolve(source.getFileName());
         }

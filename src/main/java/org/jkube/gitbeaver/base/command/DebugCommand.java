@@ -2,6 +2,7 @@ package org.jkube.gitbeaver.base.command;
 
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
+import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.logging.Log;
 
@@ -9,17 +10,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static org.jkube.logging.Log.onException;
 
-/**
- * Usage:
- *    FOR var IN path DO script
- *    FOR var IN path MATCHING pattern DO script
- */
 public class DebugCommand extends AbstractCommand {
 
-    private static final String DEFAULT_OPTIONS = "V";
+    private static final String DEFAULT_OPTIONS = "VS";
+    private final Pattern OPTIONS_PATTERN = Pattern.compile("[SLNVCW]+");
     private static final String OPTION_SUBSTITUTED_LINE = "S";
     private static final String OPTION_LINE = "L";
     private static final String OPTION_LINE_NUM = "N";
@@ -27,13 +25,29 @@ public class DebugCommand extends AbstractCommand {
     private static final String OPTION_CALL_STACK = "C";
     private static final String OPTION_WORKSPACE = "W";
 
+    private static final String OPTIONS = "options";
+
     public DebugCommand() {
-        super(0, 1, "debug");
+        super("Print information for the purpose of debugging");
+        commandlineVariant("DEBUG "+OPTIONS, "Provide a debug log with specified options");
+        commandlineVariant("DEBUG", "Provide a debug log with default options ("+DEFAULT_OPTIONS+")");
+        argument(OPTIONS, """
+            A string consisting of capital letters with the following meanings:
+            L logs the line that was executed previous to the DEBUG command (without variable substitution)
+            S logs the line that was executed previous to the DEBUG command (after variable substitution)
+            V logs all existing variables and their values
+            W logs the path of the current workspace
+            C logs the current call stack
+            """);
     }
 
     @Override
-    public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        String options = arguments.isEmpty() ? DEFAULT_OPTIONS : arguments.get(0).toUpperCase();
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        String options = arguments.get(OPTIONS);
+        options = (options == null) ? DEFAULT_OPTIONS : options.toUpperCase();
+        if (!OPTIONS_PATTERN.matcher(options).matches()) {
+            Log.error("Illegal option string: "+options);
+        }
         if (options.contains(OPTION_VARIABLES)) {
             logVariables(variables);
         }
@@ -42,6 +56,12 @@ public class DebugCommand extends AbstractCommand {
         }
         if (options.contains(OPTION_SUBSTITUTED_LINE)) {
             logLine("Previous code line (afteer variable substitution):", GitBeaver.scriptExecutor().getPreviousSubstitutedLine());
+        }
+        if (options.contains(OPTION_WORKSPACE)) {
+            logLine("Current workspace: ", workSpace.toString());
+        }
+        if (options.contains(OPTION_CALL_STACK)) {
+            logLine("Call stack: ", "not implemented, yet, sorry");
         }
     }
 

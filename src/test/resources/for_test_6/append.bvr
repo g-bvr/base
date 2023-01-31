@@ -1,3 +1,3 @@
-SETTINGS ${file}
+READ VARIABLES FROM ${file}
 LOG Appending ${variable} from ${file}
-APPEND output/result ${variable}
+APPEND ${variable} TO output/result

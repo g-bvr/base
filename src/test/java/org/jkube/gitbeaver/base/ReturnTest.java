@@ -21,7 +21,7 @@ public class ReturnTest extends GitBeaverAbstractTest {
     void beforeEachTest() { TestUtil.beforeEachTest(); }
 
     @Test
-    void helloWorldTest() {
+    void returnTest() {
         runTest(Path.of(TEST_PATH));
     }
 

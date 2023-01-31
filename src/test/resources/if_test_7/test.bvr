@@ -1,0 +1,2 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+IF NOT condition EXECUTE notScript

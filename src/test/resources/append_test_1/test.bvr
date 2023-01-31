@@ -1,2 +1,2 @@
 PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
-APPEND output/file 1 2 3
+APPEND 1 2 3 TO output/file

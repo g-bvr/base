@@ -1,2 +1,2 @@
 LOG Appending ${line}
-APPEND output/result ${line}
+APPEND ${line} TO output/result

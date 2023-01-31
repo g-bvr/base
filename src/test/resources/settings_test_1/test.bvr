@@ -1,4 +1,4 @@
 PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
-SETTINGS input/settings
-APPEND output/file ${key1}
-APPEND output/file ${Key2}
+READ VARIABLES FROM input/settings
+APPEND ${key1} TO output/result
+APPEND ${Key2} TO output/result

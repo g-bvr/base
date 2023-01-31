@@ -9,20 +9,22 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Usage:
- *    FOR var IN path DO script
- *    FOR var IN path MATCHING pattern DO script
- */
+import static org.jkube.gitbeaver.CommandParser.REST;
+
 public class SetCommand extends AbstractCommand {
 
+    private static final String VARIABLE = "variable";
+
     public SetCommand() {
-        super(2, 2, "set");
+        super("Set a variable to a value");
+        commandline("SET "+VARIABLE+" *");
+        argument(VARIABLE, "name of the variable to be set");
+        argument(REST, "value that the variable shall be set to");
     }
 
     @Override
-    public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        variables.put(arguments.get(0), arguments.get(1));
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        variables.put(arguments.get(VARIABLE), arguments.get(REST));
     }
 
 }

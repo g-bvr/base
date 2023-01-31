@@ -1,2 +1,2 @@
 PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
-FOR file IN input MATCHING setting-# DO append
+FOR FILE file IN input MATCHING setting-# DO append

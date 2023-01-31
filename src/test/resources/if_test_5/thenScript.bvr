@@ -1,2 +1,2 @@
 LOG Then
-APPEND output/result then
+APPEND then TO output/result

@@ -1,2 +1,2 @@
 PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
-FOR line IN input MATCHING file-# DO append
+FOR FILE file IN input MATCHING file-# DO append

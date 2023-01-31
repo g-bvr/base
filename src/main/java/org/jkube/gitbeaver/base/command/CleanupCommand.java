@@ -1,27 +1,29 @@
 package org.jkube.gitbeaver.base.command;
 
-import org.jkube.gitbeaver.SimpleCommand;
+import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.logging.Log;
 
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Map;
 
-/**
- * Usage: git clone providerUrl repositoryName [tag]
- */
-public class CleanupCommand extends SimpleCommand {
+public class CleanupCommand extends AbstractCommand {
+
+    private static final String FOLDER = "folder";
 
     public CleanupCommand() {
-        super(1, "cleanup");
+        super("Cleanup a folder (remove all files and sub-folders, the folder itself is kept))");
+        commandlineVariant("CLEANUP "+ FOLDER, "Cleanup the specified folder");
+        commandlineVariant("CLEANUP", "Cleanup the complete workspace");
+        argument(FOLDER, "Path of folder (relative to workspace) to be cleaned");
     }
 
     @Override
-    public void execute(WorkSpace workSpace, List<String> arguments) {
-        Path absolute = workSpace.getAbsolutePath(arguments.get(0));
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        Path absolute = workSpace.getAbsolutePath(arguments.get(FOLDER));
         Log.log("Cleaning directory "+absolute);
-        FileUtil.clear(workSpace.getAbsolutePath(arguments.get(0)));
+        FileUtil.clear(absolute);
     }
 
 }

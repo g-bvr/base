@@ -10,12 +10,15 @@ import java.util.Map;
 
 public class GitSimulateCloneCommand extends SimpleCommand {
 
+    private static final String FOLDER = "folder";
+
     public GitSimulateCloneCommand() {
-        super(1,"git", "simulate", "clone");
+        super("GIT SIMULATE CLONE", "specifies a folder in current workspace from which git operations are simulated");
+        argument(FOLDER, "folder from which clone operations are simulated (all simulated git repositories must be subfolders of this)");
     }
 
     @Override
-    public void execute(WorkSpace workSpace, List<String> arguments) {
-        GitBeaver.gitCloner().doSimulatedCloning(arguments.get(0));
+    public void execute(WorkSpace workSpace, Map<String, String> arguments) {
+        GitBeaver.gitCloner().doSimulatedCloning(arguments.get(FOLDER));
     }
 }

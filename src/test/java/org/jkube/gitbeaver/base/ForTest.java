@@ -37,6 +37,9 @@ public class ForTest extends GitBeaverAbstractTest {
     @Test
     void forTest6() { runTest(Path.of(TEST_PATH_PREFIX+6)); }
 
+    @Test
+    void forTest7() { runTest(Path.of(TEST_PATH_PREFIX+7)); }
+
     @AfterEach
     void afterEachTest() { TestUtil.assertNoFailures(); }
 

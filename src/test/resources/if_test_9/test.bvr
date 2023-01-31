@@ -1,0 +1,4 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+SET condition false
+IF condition THEN APPEND then TO output/result
+APPEND done TO output/result

@@ -1,4 +1,6 @@
-# Repository e-breuninger/git-beaver
+# Repository g-bvr/base
+
+This repository comcontains the core elements  
 
 ## Purpose
 

@@ -3,39 +3,27 @@ package org.jkube.gitbeaver.base.command;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
-import org.jkube.gitbeaver.util.FileUtil;
-import org.jkube.logging.Log;
-import org.jkube.util.Expect;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-/**
- * Usage:
- *    FOR var IN path DO script
- *    FOR var IN path MATCHING pattern DO script
- */
 public class ExecuteCommand extends AbstractCommand {
 
+    private static final String SCRIPT = "script";
+    private static final String FOLDER = "folder";
+
     public ExecuteCommand() {
-        super(1, 3, "execute");
+        super("Execute a beaver script");
+        commandlineVariant("EXECUTE "+SCRIPT, "execute a script within the current workspace");
+        commandlineVariant("EXECUTE "+SCRIPT+" IN "+ FOLDER, "execute a script (located in the current workspace) within a sub-workspace");
+        argument(SCRIPT, "the script to be executed (relatve path in current workspace)");
+        argument(FOLDER, "the folder (relatve path in current workspace) to be used as execution workspace of the script");
     }
 
     @Override
-    public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        String script = arguments.get(0);
-        if (arguments.size() > 1) {
-            expectArg(1, "in", arguments);
-            expectNumArgs(3, arguments);
-        }
-        WorkSpace executionWorkspace = arguments.size() == 3
-                ? workSpace.getSubWorkspace(arguments.get(2))
-                : workSpace;
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        String script = arguments.get(SCRIPT);
+        String folder = arguments.get(FOLDER);
+        WorkSpace executionWorkspace = folder == null ? workSpace :  workSpace.getSubWorkspace(folder);
         GitBeaver.scriptExecutor().execute(script, null, variables, workSpace, executionWorkspace);
     }
 

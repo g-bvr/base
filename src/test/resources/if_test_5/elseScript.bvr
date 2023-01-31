@@ -1,2 +1,2 @@
 LOG Else
-APPEND output/result else
+APPEND else TO output/result
