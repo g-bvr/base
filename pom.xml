@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.jkube</groupId>
             <artifactId>git-beaver</artifactId>
-            <version>${gitbeaver.version}</version>'
+            <version>${gitbeaver.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
