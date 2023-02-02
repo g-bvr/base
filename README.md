@@ -17,4 +17,4 @@ is provided by the E. Breuninger GmbH & Co. in the public repository
 
 ## Documentation of defined commands
 
-A list of all commands defined by this plugin can be found in this [automatically generated documentation](doc/BasePlugin.html). 
+A list of all commands defined by this plugin can be found in this [automatically generated documentation](https://htmlpreview.github.io/?https://raw.githubusercontent.com/g-bvr/base/main/doc/BasePlugin.html). 
