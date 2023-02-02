@@ -15,6 +15,6 @@ plugins (based on a tabular selection)
 is provided by the E. Breuninger GmbH & Co. in the public repository
 [e-breuninger/git-beaver](https://github.com/e-breuninger/git-beaver).
 
-## Documentation
+## Documentation of defined commands
 
 A list of all commands defined by this plugin can be found in this [automatically generated documentation](doc/BasePlugin.html). 
