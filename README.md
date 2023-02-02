@@ -1,11 +1,20 @@
 # Repository g-bvr/base
 
-This repository comcontains the core elements  
+This repository defines a plugin that can be used to enhance the built-in set of commands made available in the core gitbeaver repository [g-bvr/core](https://github.com/g-bvr/core). 
+This plugin can be integrated into the [core docker image](https://hub.docker.com/r/gitbeaver/core/tags)
+ by executing the following beaver script:
 
-## Purpose
+```
+GIT CLONE https://github.com/g-bvr base main
+PLUGIN COMPILE base/src/main/java
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+```
 
-This repositories is used to build docker releases of GitBeaver including recommended plugins (see plugins.md). 
-Plugins are frozen after the list has been processed, this prevents other beaver scripts from installing additional
-(potentially harmful) plugins.
+A more convenient way to build a gitbeaver release with multiple 
+plugins (based on a tabular selection) 
+is provided by the E. Breuninger GmbH & Co. in the public repository
+[e-breuninger/git-beaver](https://github.com/e-breuninger/git-beaver).
 
-TODO? Prevent harmful plugins from reading the master key volume.
+## Documentation
+
+A list of all commands defined by this plugin can be found in this [automatically generated documentation](doc/BasePlugin.html). 

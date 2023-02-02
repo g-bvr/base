@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: #FAFFFA;
+}
+#myheader {
+  font-size: 60px;
+  font-weight: 600;
+  color: #3d3d3e;
+  text-shadow: 0px 0px 5px #EEEEEE, 0px 0px 10px #EEEEEE, 0px 0px 10px #EEEEEE,
+    0px 0px 20px #EEEEEE;
+}
+#mytable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#mytable td, #mytable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#mytable tr:nth-child(even){background-color: #f2f2e2;}
+#mytable tr:nth-child(odd){background-color: #e2f2f2;}
+#mytable tr:hover {background-color: #ddd;}
+#mytable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<h1 id="myheader">BasePlugin</h1>
+<h2>Purpose</h2>
+Collects various elementary commands (file handling, flow control, sub script execution, loops, etc.)
+
+<h2>Commands</h2>
+<table id="mytable">
+<tr><th>Command</th><th>Description</td></tr>
+  <tr><td><a href="AppendCommand.html">AppendCommand</a></td><td>Append a text to a file</td></tr>
+  <tr><td><a href="AssembleCommand.html">AssembleCommand</a></td><td>Append the contant of a file to another file</td></tr>
+  <tr><td><a href="CleanupCommand.html">CleanupCommand</a></td><td>Cleanup a folder (remove all files and sub-folders, the folder itself is kept))</td></tr>
+  <tr><td><a href="CopyCommand.html">CopyCommand</a></td><td>Copy a file or directory to another place. It is not allowed that source is a file and target
+is an (already existing) directory. If target is an existing directory and the source is a
+file, this file will be copied into a new file in tha tsrget directory with same filename.
+If source is a directory and target is an already existing drectory, the contents of source are copied
+to the target. If the target directory does not exist, yet, it will be created (including ancestors
+if needed).
+</td></tr>
+  <tr><td><a href="DebugCommand.html">DebugCommand</a></td><td>Print information for the purpose of debugging</td></tr>
+  <tr><td><a href="ExecuteCommand.html">ExecuteCommand</a></td><td>Execute a beaver script</td></tr>
+  <tr><td><a href="ForCommand.html">ForCommand</a></td><td>Execute a command for multiple items</td></tr>
+  <tr><td><a href="GitPullOrCloneCommand.html">GitPullOrCloneCommand</a></td><td>Pull a changes of a git repository in the current workspace, if it was not cloned yet, clone it from specified remote location</td></tr>
+  <tr><td><a href="GitSimulateCloneCommand.html">GitSimulateCloneCommand</a></td><td>specifies a folder in current workspace from which git operations are simulated</td></tr>
+  <tr><td><a href="IfCommand.html">IfCommand</a></td><td>Branching statements, depending on a boolean condition</td></tr>
+  <tr><td><a href="DokumentationCommand.html">DokumentationCommand</a></td><td>Create a set of html file for documentation.</td></tr>
+  <tr><td><a href="ReturnCommand.html">ReturnCommand</a></td><td>Return a value from an executed script back to the calling script. The returned value is accesible in the calling script via the variable RETURN_VALUE</td></tr>
+  <tr><td><a href="SetCommand.html">SetCommand</a></td><td>Set a variable to a value</td></tr>
+  <tr><td><a href="ReadVariablesCommand.html">ReadVariablesCommand</a></td><td>Read multiple variable from a file</td></tr>
+  <tr><td><a href="StepStartCommand.html">StepStartCommand</a></td><td>Marks the start of a step block (for structured logging)</td></tr>
+  <tr><td><a href="StepEndCommand.html">StepEndCommand</a></td><td>Marks the end of a step block (for structured logging)</td></tr>
+  <tr><td><a href="StepStateCommand.html">StepStateCommand</a></td><td>Set the state of the current step</td></tr>
+</table>
+</body>
+</html>
+

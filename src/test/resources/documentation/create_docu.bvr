@@ -1,0 +1,2 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+DOCUMENT org.jkube.gitbeaver.base.BasePlugin INTO doc

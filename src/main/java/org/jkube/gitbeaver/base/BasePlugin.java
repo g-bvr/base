@@ -6,7 +6,9 @@ import org.jkube.gitbeaver.plugin.SimplePlugin;
 public class BasePlugin extends SimplePlugin {
 
     public BasePlugin() {
-        super(
+        super("""
+                        Collects various elementary commands (file handling, flow control, sub script execution, loops, etc.)
+                        """,
                 AppendCommand.class,
                 AssembleCommand.class,
                 CleanupCommand.class,
@@ -17,6 +19,7 @@ public class BasePlugin extends SimplePlugin {
                 GitPullOrCloneCommand.class,
                 GitSimulateCloneCommand.class,
                 IfCommand.class,
+                DokumentationCommand.class,
                 ReturnCommand.class,
                 SetCommand.class,
                 ReadVariablesCommand.class,
