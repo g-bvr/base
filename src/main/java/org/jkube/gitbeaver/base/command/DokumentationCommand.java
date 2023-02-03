@@ -26,26 +26,45 @@ public class DokumentationCommand extends AbstractCommand {
               font-size: 60px;
               font-weight: 600;
               color: #3d3d3e;
-              text-shadow: 0px 0px 5px #EEEEEE, 0px 0px 10px #EEEEEE, 0px 0px 10px #EEEEEE,
+              text-shadow: 0px 0px 5px #DDDDDD, 0px 0px 10px #DDDDDD, 0px 0px 10px #EEEEEE,
                 0px 0px 20px #EEEEEE;
             }
-            #mytable {
+            #mytable1 {
               font-family: Arial, Helvetica, sans-serif;
               border-collapse: collapse;
               width: 100%;
             }
-            #mytable td, #mytable th {
+            #mytable1 td, #mytable1 th {
               border: 1px solid #ddd;
               padding: 8px;
             }
-            #mytable tr:nth-child(even){background-color: #f2f2e2;}
-            #mytable tr:nth-child(odd){background-color: #e2f2f2;}
-            #mytable tr:hover {background-color: #ddd;}
-            #mytable th {
+            #mytable1 tr:nth-child(even){background-color: #f2f2e2;}
+            #mytable1 tr:nth-child(odd){background-color: #e2f2f2;}
+            #mytable1 tr:hover {background-color: #ddd;}
+            #mytable1 th {
               padding-top: 12px;
               padding-bottom: 12px;
               text-align: left;
               background-color: #04AA6D;
+              color: white;
+            }
+            #mytable2 {
+              font-family: Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            #mytable2 td, #mytable2 th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            #mytable2 tr:nth-child(even){background-color: #f2f2e2;}
+            #mytable2 tr:nth-child(odd){background-color: #e2f2f2;}
+            #mytable2 tr:hover {background-color: #ddd;}
+            #mytable2 th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #A43A6D;
               color: white;
             }
             </style>
@@ -106,8 +125,8 @@ public class DokumentationCommand extends AbstractCommand {
         result.add("<h2>Purpose</h2>");
         result.add(plugin.getDescription());
         result.add("<h2>Commands</h2>");
-        result.add("<table id=\"mytable\">");
-        result.add("<tr><th>Command</th><th>Description</td></tr>");
+        result.add("<table id=\"mytable1\">");
+        result.add("<tr><th>Command</th><th>Description</th></tr>");
         plugin.getCommands().forEach(c -> result.add(createTableRow(c)));
         result.add("</table>");
         result.add(HTML_FOOTER);
@@ -121,15 +140,15 @@ public class DokumentationCommand extends AbstractCommand {
         result.add("<h2>Purpose</h2>");
         result.add(command.getDescription());
         result.add("<h2>Variants</h2>");
-        result.add("<table id=\"mytable\">");
-        result.add("<tr><th>Usage</th><th>Description</td></tr>");
+        result.add("<table id=\"mytable1\">");
+        result.add("<tr><th>Usage</th><th>Description</th></tr>");
         command.getCommandPatterns().forEach(p -> result.add(createTableRow(p)));
-        result.add("</table id=\"mytable\">");
+        result.add("</table>");
         result.add("");
         result.add("<h2>Arguments</h2>");
         result.add("");
-        result.add("<table id=\"mytable\">");
-        result.add("<tr><th>Argument</th><th>Value</td></tr>");
+        result.add("<table id=\"mytable2\">");
+        result.add("<tr><th>Argument</th><th>Value</th></tr>");
         command.getArguments().forEach((k, v) -> result.add(createTableRow(k, v)));
         result.add("</table>");
         result.add("<h2>Plugin</h2>");

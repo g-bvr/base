@@ -6,7 +6,7 @@
 
     <groupId>org.jkube</groupId>
     <artifactId>gitbeaver-base</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${gitbeaver.version}</version>
     <properties>
         <gitbeaver.version>0.0.1</gitbeaver.version>
         <junit.version>5.5.2</junit.version>
