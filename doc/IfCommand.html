@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: #FAFFFA;
+}
+#myheader {
+  font-size: 60px;
+  font-weight: 600;
+  color: #3d3d3e;
+  text-shadow: 0px 0px 5px #DDDDDD, 0px 0px 10px #DDDDDD, 0px 0px 10px #EEEEEE,
+    0px 0px 20px #EEEEEE;
+}
+#mytable1 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#mytable1 td, #mytable1 th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#mytable1 tr:nth-child(even){background-color: #f2f2e2;}
+#mytable1 tr:nth-child(odd){background-color: #e2f2f2;}
+#mytable1 tr:hover {background-color: #ddd;}
+#mytable1 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+#mytable2 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#mytable2 td, #mytable2 th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#mytable2 tr:nth-child(even){background-color: #f2f2e2;}
+#mytable2 tr:nth-child(odd){background-color: #e2f2f2;}
+#mytable2 tr:hover {background-color: #ddd;}
+#mytable2 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #A43A6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<h1 id="myheader">IfCommand</h1>
+<h2>Purpose</h2>
+Branching statements, depending on a boolean condition
+<h2>Variants</h2>
+<table id="mytable1">
+<tr><th>Usage</th><th>Description</th></tr>
+  <tr><td>IF condition EXECUTE script1</td><td>Execute a script if condition is met</td></tr>
+  <tr><td>IF NOT condition EXECUTE script2</td><td>Execute a script if condition is not met</td></tr>
+  <tr><td>IF condition EXECUTE script1 ELSE script2</td><td>Execute one of two scripts depending on condition</td></tr>
+  <tr><td>IF condition SET variable TO value1 ELSE value2</td><td>Set variable to one of two values depending on condition</td></tr>
+  <tr><td>IF condition THEN *</td><td>Execute a command if condition is met</td></tr>
+</table>
+
+<h2>Arguments</h2>
+
+<table id="mytable2">
+<tr><th>Argument</th><th>Value</th></tr>
+  <tr><td>condition</td><td>a variable that holds the condition value. The 'ELSE' action is taken if the variable does not exist, is empty, or is one out of no, 0, false</td></tr>
+  <tr><td>script1</td><td>the script that is to be execture if the condition is evaluated to true</td></tr>
+  <tr><td>script2</td><td>the script that is to be execture if the condition is is evaluated to false</td></tr>
+  <tr><td>value1</td><td>the value that is used if the condition is evaluated to true</td></tr>
+  <tr><td>value2</td><td>the value that is used if the condition is evaluated to false</td></tr>
+  <tr><td>variable</td><td>the variable that shall be set to a conditional value</td></tr>
+  <tr><td>*</td><td>the command to be executed if condition is evaluated to true</td></tr>
+</table>
+<h2>Plugin</h2>
+This command is defined in <a href="BasePlugin.html">BasePlugin</a>
+</body>
+</html>
+

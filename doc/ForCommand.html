@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: #FAFFFA;
+}
+#myheader {
+  font-size: 60px;
+  font-weight: 600;
+  color: #3d3d3e;
+  text-shadow: 0px 0px 5px #DDDDDD, 0px 0px 10px #DDDDDD, 0px 0px 10px #EEEEEE,
+    0px 0px 20px #EEEEEE;
+}
+#mytable1 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#mytable1 td, #mytable1 th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#mytable1 tr:nth-child(even){background-color: #f2f2e2;}
+#mytable1 tr:nth-child(odd){background-color: #e2f2f2;}
+#mytable1 tr:hover {background-color: #ddd;}
+#mytable1 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+#mytable2 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#mytable2 td, #mytable2 th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#mytable2 tr:nth-child(even){background-color: #f2f2e2;}
+#mytable2 tr:nth-child(odd){background-color: #e2f2f2;}
+#mytable2 tr:hover {background-color: #ddd;}
+#mytable2 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #A43A6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<h1 id="myheader">ForCommand</h1>
+<h2>Purpose</h2>
+Execute a command for multiple items
+<h2>Variants</h2>
+<table id="mytable1">
+<tr><th>Usage</th><th>Description</th></tr>
+  <tr><td>FOR FILE filevar IN folder DO script</td><td>Execute the command for all files in specified folder</td></tr>
+  <tr><td>FOR SUBFOLDER foldervar IN folder DO script</td><td>Execute the command for all subfolders of specified folder</td></tr>
+  <tr><td>FOR LINE linevar IN file DO script</td><td>Execute the command for all lines of specified text file</td></tr>
+  <tr><td>FOR FILE filevar IN folder MATCHING pattern DO script</td><td>Execute the command for all files in specified folder matching specified pattern</td></tr>
+  <tr><td>FOR SUBFOLDER foldervar IN folder MATCHING pattern DO script</td><td>Execute the command for all subfolders of specified folder matching specified pattern</td></tr>
+  <tr><td>FOR LINE linevar IN file MATCHING pattern DO script</td><td>Execute the command for all lines of specified text file matching specified pattern</td></tr>
+</table>
+
+<h2>Arguments</h2>
+
+<table id="mytable2">
+<tr><th>Argument</th><th>Value</th></tr>
+  <tr><td>foldervar</td><td>the variable into the folder item (its path relative to the workspace) name shall be written</td></tr>
+  <tr><td>filevar</td><td>the variable into the file item (its path relative to the workspace) shall be written</td></tr>
+  <tr><td>linevar</td><td>the variable into the line item shall be written</td></tr>
+  <tr><td>file</td><td>the file from which lines shall be read</td></tr>
+  <tr><td>folder</td><td>the folder in which files/subfolders shall be listed</td></tr>
+  <tr><td>pattern</td><td>a regex expression by which the found items are filtered, the wildcard character # is resolved to [0-9]+ i.e. matches numbers</td></tr>
+  <tr><td>script</td><td>the script to be executed for each valid item</td></tr>
+</table>
+<h2>Plugin</h2>
+This command is defined in <a href="BasePlugin.html">BasePlugin</a>
+</body>
+</html>
+
