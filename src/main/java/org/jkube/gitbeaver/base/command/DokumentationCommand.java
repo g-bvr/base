@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class DokumentationCommand extends AbstractCommand {
 
@@ -79,13 +80,16 @@ public class DokumentationCommand extends AbstractCommand {
 
     private static final String PLUGIN = "plugin";
     private static final String FOLDER = "folder";
+    private static final String RELEASE = "release";
     private static final String HTML = ".html";
+    private static final String OVERVIEW = "index";
 
     public DokumentationCommand() {
         super( "Create a set of html file for documentation.");
         commandlineVariant("DOCUMENT "+PLUGIN+" INTO "+FOLDER, "Create documentation for specified plugin");
-        commandlineVariant("DOCUMENT ALL PLUGINS INTO "+FOLDER, "Create documentation for all enabled plugins");
+        commandlineVariant("DOCUMENT RELEASE "+RELEASE+" INTO "+FOLDER, "Create documentation for all enabled plugins");
         argument(PLUGIN, "name of the plugin to be documented");
+        argument(RELEASE, "name of the release to be documented");
         argument(FOLDER, "path of folder (relative to current workspace) into which the documentation will be stored, the folder (and its ancestors) will be created if not existent");
     }
 
@@ -93,23 +97,31 @@ public class DokumentationCommand extends AbstractCommand {
     public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
         Path folder = workSpace.getAbsolutePath(arguments.get(FOLDER));
         FileUtil.createIfNotExists(folder);
-        createDocumentation(folder, arguments.get(PLUGIN));
-    }
-
-    private void createDocumentation(Path folder, String plugin) {
-        if (plugin == null) {
-            Log.log("Creating documentation for all plugins");
-            createAllPluginsDocumentation(folder, GitBeaver.pluginManager().getAllPlugins());
-        } else {
+        if (arguments.containsKey(PLUGIN)) {
+            String plugin = arguments.get(PLUGIN);
             Log.log("Creating documentation for plugin: "+plugin);
-            createPluginDocumentation(folder, GitBeaver.pluginManager().getPlugin(plugin));
+            createPluginDocumentation(folder, GitBeaver.pluginManager().getPlugin(plugin), null);
+        } else {
+            String release = arguments.get(RELEASE);
+            Log.log("Creating documentation for release "+release);
+            createAllPluginsDocumentation(folder, release, GitBeaver.pluginManager().getAllPlugins());
         }
     }
 
-    private void createPluginDocumentation(Path folder, Plugin plugin) {
+    private void createDocumentation(Path folder, String release, String plugin) {
+        if (plugin == null) {
+            Log.log("Creating documentation for all plugins");
+            createAllPluginsDocumentation(folder, release, GitBeaver.pluginManager().getAllPlugins());
+        } else {
+            Log.log("Creating documentation for plugin: "+plugin);
+            createPluginDocumentation(folder, GitBeaver.pluginManager().getPlugin(plugin), release);
+        }
+    }
+
+    private void createPluginDocumentation(Path folder, Plugin plugin, String release) {
         Expect.notNull(plugin).elseFail("No such plugin found in: "+GitBeaver.pluginManager().getAllPlugins());
         String name = plugin.getClass().getSimpleName();
-        FileUtil.store(folder.resolve(name+HTML), createPluginPage(name, plugin));
+        FileUtil.store(folder.resolve(name+HTML), createPluginPage(name, plugin, release));
         plugin.getCommands().forEach(c -> createCommandDocumentation(folder, c, name));
     }
 
@@ -118,7 +130,7 @@ public class DokumentationCommand extends AbstractCommand {
         FileUtil.store(folder.resolve(name+HTML), createCommandPage(name, command, pluginName));
     }
 
-    private List<String> createPluginPage(String name, Plugin plugin) {
+    private List<String> createPluginPage(String name, Plugin plugin, String release) {
         List<String> result = new ArrayList<>();
         result.add(HTML_HEADER);
         result.add("<h1 id=\"myheader\">"+name+"</h1>");
@@ -129,6 +141,10 @@ public class DokumentationCommand extends AbstractCommand {
         result.add("<tr><th>Command</th><th>Description</th></tr>");
         plugin.getCommands().forEach(c -> result.add(createTableRow(c)));
         result.add("</table>");
+        if (release != null) {
+            result.add("<h2>Release</h2>");
+            result.add("The plugin is part og release "+hyperlink(OVERVIEW+HTML, release));
+        }
         result.add(HTML_FOOTER);
         return result;
     }
@@ -178,7 +194,36 @@ public class DokumentationCommand extends AbstractCommand {
         return "  <tr><td>"+col1+"</td><td>"+col2+"</td></tr>";
     }
 
-    private void createAllPluginsDocumentation(Path folder, Map<String, Plugin> allPlugins) {
+    private void createAllPluginsDocumentation(Path folder, String release, Map<String, Plugin> allPlugins) {
+        allPlugins.keySet().forEach(p -> createDocumentation(folder, release, p));
+        FileUtil.store(folder.resolve(OVERVIEW+HTML), createOverviewPage(release, allPlugins));
+    }
+
+    private List<String> createOverviewPage(String release, Map<String, Plugin> plugins) {
+        List<String> result = new ArrayList<>();
+        result.add(HTML_HEADER);
+        result.add("<h1 id=\"myheader\">"+release+"</h1>");
+        result.add("<h2>Plugins</h2>");
+        result.add("<table id=\"mytable1\">");
+        result.add("<tr><th>Plugin</th><th>Purpose</th></tr>");
+        plugins.values().forEach(p -> result.add(createTableRow(p)));
+        result.add("</table>");
+        result.add("");
+        result.add("<h2>Commands</h2>");
+        result.add("");
+        result.add("<table id=\"mytable2\">");
+        result.add("<tr><th>Command</th><th>Purpose</th></tr>");
+        Map<String, Command> allCommands = new TreeMap<>();
+        plugins.values().forEach(p -> p.getCommands().forEach(c -> allCommands.put(c.getClass().getSimpleName(), c)));
+        allCommands.values().forEach(c -> result.add(createTableRow(c)));
+        result.add("</table>");
+        result.add(HTML_FOOTER);
+        return result;
+    }
+
+    private String createTableRow(Plugin plugin) {
+        String name = plugin.getClass().getSimpleName();
+        return createTableRow(hyperlink(name+HTML, name), plugin.getDescription());
     }
 
 }
