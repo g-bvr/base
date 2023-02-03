@@ -20,7 +20,7 @@ public class DokumentationCommand extends AbstractCommand {
             <style>
             body {
               background-color: #FAFFFA;
-            }           
+            }
             #myheader {
               font-size: 60px;
               font-weight: 600;
@@ -85,8 +85,8 @@ public class DokumentationCommand extends AbstractCommand {
     }
 
     private void createPluginDocumentation(Path folder, Plugin plugin) {
+        Expect.notNull(plugin).elseFail("No such plugin found in: "+GitBeaver.pluginManager().getAllPlugins());
         String name = plugin.getClass().getSimpleName();
-        Expect.notNull(plugin).elseFail("No such plugin "+name+" found in: "+GitBeaver.pluginManager().getAllPlugins());
         FileUtil.store(folder.resolve(name+HTML), createPluginPage(name, plugin));
         plugin.getCommands().forEach(c -> createCommandDocumentation(folder, c, name));
     }
