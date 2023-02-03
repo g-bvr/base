@@ -4,6 +4,7 @@ import org.jkube.gitbeaver.*;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.interfaces.Plugin;
 import org.jkube.gitbeaver.util.FileUtil;
+import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.nio.file.Path;
@@ -78,8 +79,10 @@ public class DokumentationCommand extends AbstractCommand {
 
     private void createDocumentation(Path folder, String plugin) {
         if (plugin == null) {
+            Log.log("Creating documentation for all plugins");
             createAllPluginsDocumentation(folder, GitBeaver.pluginManager().getAllPlugins());
         } else {
+            Log.log("Creating documentation for plugin: "+plugin);
             createPluginDocumentation(folder, GitBeaver.pluginManager().getPlugin(plugin));
         }
     }
