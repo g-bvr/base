@@ -1,6 +1,9 @@
 # Repository g-bvr/base
 
 This repository defines a plugin that can be used to enhance the built-in set of commands made available in the core gitbeaver repository [g-bvr/core](https://github.com/g-bvr/core). 
+
+## Activation
+
 This plugin can be integrated into the [core docker image](https://hub.docker.com/r/gitbeaver/core/tags)
  by executing the following beaver script:
 
