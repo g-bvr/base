@@ -49,7 +49,6 @@ public class GitPullOrCloneCommand extends AbstractCommand {
                 .dir(workdir)
                 .successMarker("Updated ")
                 .logConsole(logger.createSubConsole())
-                .logConsole(new DefaultLogConsole())
                 .execute();
     }
 
