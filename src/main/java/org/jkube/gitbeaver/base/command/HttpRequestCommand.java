@@ -39,6 +39,7 @@ public class HttpRequestCommand extends AbstractCommand {
         Map<String, String> headers = getHeaders(lines);
         HttpSettings settings = new HttpSettings();
         Optional<String> result = Http.put(settings, url, body);
+        Log.log("Sending request: "+url);
         Expect.isTrue(result.isPresent()).elseFail("Request could not be executed");
         Log.log("Request returned: "+result);
     }
