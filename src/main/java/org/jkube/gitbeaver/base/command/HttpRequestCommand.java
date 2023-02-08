@@ -54,7 +54,7 @@ public class HttpRequestCommand extends AbstractCommand {
             }
         }
         Expect.notNull(found).elseFail("Did not find any line for key: "+key);
-        return key;
+        return found;
     }
 
     private Map<String, String> getHeaders(List<String> lines) {
