@@ -36,8 +36,8 @@ public class HttpRequestCommand extends AbstractCommand {
         String method = getSpec(lines, "METHOD");
         String url = getSpec(lines, "URL");
         String body = String.join("\n", FileUtil.readLines(workSpace.getAbsolutePath(arguments.get(BODY))));
-        Map<String, String> headers = getHeaders(lines);
         HttpSettings settings = new HttpSettings();
+        settings.headers.putAll(getHeaders(lines));
         Optional<String> result = Http.put(settings, url, body);
         Log.log("Sending request: "+url);
         Expect.isTrue(result.isPresent()).elseFail("Request could not be executed");
