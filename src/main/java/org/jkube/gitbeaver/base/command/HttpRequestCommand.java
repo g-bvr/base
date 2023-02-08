@@ -38,8 +38,8 @@ public class HttpRequestCommand extends AbstractCommand {
         String body = String.join("\n", FileUtil.readLines(workSpace.getAbsolutePath(arguments.get(BODY))));
         HttpSettings settings = new HttpSettings();
         settings.headers.putAll(getHeaders(lines));
-        Optional<String> result = Http.put(settings, url, body);
         Log.log("Sending request: "+url);
+        Optional<String> result = Http.post(settings, url, body);
         Expect.isTrue(result.isPresent()).elseFail("Request could not be executed");
         Log.log("Request returned: "+result);
     }
