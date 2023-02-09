@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver.base.command;
 
+import org.jkube.application.Application;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.ScriptExecutor;
 import org.jkube.gitbeaver.SimpleCommand;
@@ -43,6 +44,7 @@ public class HttpRequestCommand extends AbstractCommand {
             case "POST" -> Http.post(settings, url, body);
             case "PUT" -> Http.put(settings, url, body);
             case "PATCH" -> Http.patch(settings, url, body);
+            default -> Application.fail("No such method supported: "+method);
         };
         Expect.isTrue(result.isPresent()).elseFail("Request could not be executed");
         Log.log("Request returned: "+result);
