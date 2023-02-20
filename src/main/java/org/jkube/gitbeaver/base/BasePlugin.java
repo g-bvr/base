@@ -24,6 +24,7 @@ public class BasePlugin extends SimplePlugin {
                 ReturnCommand.class,
                 SetCommand.class,
                 ReadVariablesCommand.class,
+                SleepCommand.class,
                 StepStartCommand.class,
                 StepEndCommand.class,
                 StepStateCommand.class
