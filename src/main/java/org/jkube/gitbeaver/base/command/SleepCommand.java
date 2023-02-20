@@ -20,7 +20,7 @@ public class SleepCommand extends SimpleCommand {
 
     @Override
     public void execute(WorkSpace workSpace, Map<String, String> arguments) {
-        Log.interruptable(() -> Thread.sleep(Integer.parseInt(arguments.get(SECONDS))));
+        Log.interruptable(() -> Thread.sleep(Integer.parseInt(arguments.get(SECONDS))*1000));
     }
 
 }
