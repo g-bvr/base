@@ -10,8 +10,8 @@
     <properties>
         <gitbeaver.version>0.0.1</gitbeaver.version>
         <junit.version>5.5.2</junit.version>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
