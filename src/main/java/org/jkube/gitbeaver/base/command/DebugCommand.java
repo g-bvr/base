@@ -7,8 +7,12 @@ import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.logging.Log;
 
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DebugCommand extends AbstractCommand {
 
@@ -54,8 +58,9 @@ public class DebugCommand extends AbstractCommand {
             logLine("Previous code line (afteer variable substitution):", GitBeaver.scriptExecutor().getPreviousSubstitutedLine());
         }
         if (options.contains(OPTION_WORKSPACE)) {
-            logLine("Current workspace: ", workSpace.getWorkdir().toString());
-            Log.onException(() -> Files.walk(workSpace.getWorkdir()).forEach(p -> logLine("   ", p.toString()))).fail("Could not walk workdir");
+            Stream<Path> files = Log.onException(() -> Files.walk(workSpace.getWorkdir())).fail("Could not walk workdir");
+            List<String> list = files.map(Path::toString).collect(Collectors.toList());
+            logLine("Workspace "+workSpace.getWorkdir().toString(), String.join("\n", list));
         }
         if (options.contains(OPTION_CALL_STACK)) {
             logLine("Call stack: ", "not implemented, yet, sorry");
