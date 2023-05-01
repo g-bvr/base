@@ -3,8 +3,10 @@ package org.jkube.gitbeaver.base.command;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
+import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.logging.Log;
 
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -52,7 +54,8 @@ public class DebugCommand extends AbstractCommand {
             logLine("Previous code line (afteer variable substitution):", GitBeaver.scriptExecutor().getPreviousSubstitutedLine());
         }
         if (options.contains(OPTION_WORKSPACE)) {
-            logLine("Current workspace: ", workSpace.toString());
+            logLine("Current workspace: ", workSpace.getWorkdir().toString());
+            Log.onException(() -> Files.walk(workSpace.getWorkdir()).forEach(p -> logLine("   ", p.toString()))).fail("Could not walk workdir");
         }
         if (options.contains(OPTION_CALL_STACK)) {
             logLine("Call stack: ", "not implemented, yet, sorry");
