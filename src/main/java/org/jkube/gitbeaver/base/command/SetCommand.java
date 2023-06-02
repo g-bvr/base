@@ -13,14 +13,19 @@ public class SetCommand extends AbstractCommand {
 
     public SetCommand() {
         super("Set a variable to a value");
-        commandline("SET "+VARIABLE+" *");
+        commandlineVariant("SET "+VARIABLE+" *", "set variable to a value");
+        commandlineVariant("SET "+VARIABLE, "set variable to empty string");
         argument(VARIABLE, "name of the variable to be set");
         argument(REST, "value that the variable shall be set to");
     }
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
-        variables.put(arguments.get(VARIABLE), arguments.get(REST));
+        String value = arguments.get(REST);
+        if (value == null) {
+            value = "";
+        }
+        variables.put(arguments.get(VARIABLE), value);
     }
 
 }
