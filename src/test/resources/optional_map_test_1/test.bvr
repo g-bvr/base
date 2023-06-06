@@ -1,0 +1,8 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+READ OPTIONAL MAP FROM input/settings
+APPEND ${key1} TO output/result
+APPEND ${Key2} TO output/result
+APPEND ${Key3} TO output/result
+APPEND ${Key4} TO output/result
+APPEND ${Key5} TO output/result
+APPEND ${Key6} TO output/result

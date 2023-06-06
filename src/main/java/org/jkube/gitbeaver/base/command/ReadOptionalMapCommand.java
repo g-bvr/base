@@ -9,23 +9,27 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-public class ReadVariablesCommand extends AbstractCommand {
+public class ReadOptionalMapCommand extends AbstractCommand {
 
     private static final String FILE = "file";
-    public static final String SPLIT_REGEX = " ";
+    public static final String SPLIT_REGEX = " *[:=] *";
 
-    public ReadVariablesCommand() {
-        super("Read multiple variable from a file");
-        commandline("READ VARIABLES FROM "+FILE);
-        argument(FILE, "path to the file in current workspace");
+    public ReadOptionalMapCommand() {
+        super("Read a key value map from a file into variables");
+        commandline("READ OPTIONAL MAP FROM "+FILE);
+        argument(FILE, "path to the file in current workspace, do nothing if the file does not exist");
     }
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
         Path path = workSpace.getAbsolutePath(arguments.get(FILE));
-        List<String> lines = FileUtil.readLines(path);
-        Log.log("Read {} settings from {}", lines.size(), path);
-        lines.forEach(line -> addVariable(line, variables));
+        if (path.toFile().exists()) {
+            List<String> lines = FileUtil.readLines(path);
+            Log.log("Read {} key-value pairs from {}", lines.size(), path);
+            lines.forEach(line -> addVariable(line, variables));
+        } else {
+            Log.log("Optional map does not exist: {}",  path);
+        }
     }
 
     private void addVariable(String line, Map<String, String> variables) {
