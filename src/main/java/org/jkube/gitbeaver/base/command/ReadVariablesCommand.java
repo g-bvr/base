@@ -12,6 +12,7 @@ import java.util.Map;
 public class ReadVariablesCommand extends AbstractCommand {
 
     private static final String FILE = "file";
+    public static final String SPLIT_REGEX = "[ :=]+";
 
     public ReadVariablesCommand() {
         super("Read multiple variable from a file");
@@ -28,7 +29,7 @@ public class ReadVariablesCommand extends AbstractCommand {
     }
 
     private void addVariable(String line, Map<String, String> variables) {
-        String[] split = line.trim().split(" ", 2);
+        String[] split = line.trim().split(SPLIT_REGEX, 2);
         variables.put(split[0], split.length == 2 ? split[1] : "");
     }
 }
