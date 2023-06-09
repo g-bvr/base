@@ -15,10 +15,11 @@ import java.util.stream.Collectors;
 public class ForCommand extends AbstractCommand {
 
     public enum ForType {
-        FILE, FOLDER, LINE
+        FILE, FOLDER, SUBFOLDER, LINE
     }
 
     private static final String FOLDERVAR = "foldervar";
+    private static final String SUBFOLDERVAR = "subfoldervar";
     private static final String FILEVAR = "filevar";
     private static final String LINEVAR = "linevar";
     private static final String FILE = "file";
@@ -29,12 +30,15 @@ public class ForCommand extends AbstractCommand {
     public ForCommand() {
         super("Execute a command for multiple items");
         commandlineVariant("FOR FILE "+FILEVAR+" IN "+FOLDER+" DO "+SCRIPT, "Execute the command for all files in specified folder");
-        commandlineVariant("FOR SUBFOLDER "+FOLDERVAR+" IN "+FOLDER+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder");
+        commandlineVariant("FOR FOLDER "+FOLDERVAR+" IN "+FOLDER+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder");
+        commandlineVariant("FOR SUBFOLDER "+SUBFOLDERVAR+" IN "+FOLDER+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder");
         commandlineVariant("FOR LINE "+LINEVAR+" IN "+FILE+" DO "+SCRIPT, "Execute the command for all lines of specified text file");
         commandlineVariant("FOR FILE "+FILEVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all files in specified folder matching specified pattern");
-        commandlineVariant("FOR SUBFOLDER "+FOLDERVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder matching specified pattern");
+        commandlineVariant("FOR FOLDER "+FOLDERVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder matching specified pattern");
+        commandlineVariant("FOR SUBFOLDER "+SUBFOLDERVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder matching specified pattern");
         commandlineVariant("FOR LINE "+LINEVAR+" IN "+FILE+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all lines of specified text file matching specified pattern");
-        argument(FOLDERVAR, "the variable into the folder item (its path relative to the workspace) name shall be written");
+        argument(FOLDERVAR, "the variable into the folder item (its path relative to the workspace) shall be written");
+        argument(SUBFOLDERVAR, "the variable into the folder item (its path relative containing folder) shall be written");
         argument(FILEVAR, "the variable into the file item (its path relative to the workspace) shall be written");
         argument(LINEVAR, "the variable into the line item shall be written");
         argument(FILE, "the file from which lines shall be read");
@@ -56,6 +60,10 @@ public class ForCommand extends AbstractCommand {
             variable = arguments.get(FOLDERVAR);
             filename = arguments.get(FOLDER);
             type = ForType.FOLDER;
+        } else if (arguments.containsKey(SUBFOLDERVAR)) {
+            variable = arguments.get(SUBFOLDERVAR);
+            filename = arguments.get(FOLDER);
+            type = ForType.SUBFOLDER;
         } else {
             variable = arguments.get(FILEVAR);
             filename = arguments.get(FOLDER);
@@ -72,8 +80,8 @@ public class ForCommand extends AbstractCommand {
             case LINE -> readLines(file, regex);
             case FILE -> readItemsInFolder(file, regex, false, workSpace);
             case FOLDER -> readItemsInFolder(file, regex, true, workSpace);
+            case SUBFOLDER -> readItemsInFolder(file, regex, true, null);
         };
-        Map<String, String> parsedArgs = new HashMap<>();
         String script = arguments.get(SCRIPT);
         Expect.notNull(script).elseFail("");
         String prevValue = variables.get(variable);
@@ -103,7 +111,7 @@ public class ForCommand extends AbstractCommand {
                 String relative = f.toPath().getFileName().toString();
                 if ((f.isDirectory() == isDirectory) && regex.matcher(relative).matches()) {
                     Log.log("Using file {}", relative);
-                    items.add(workSpace.getRelativePath(f.toPath()).toString());
+                    items.add(workSpace == null ? relative : workSpace.getRelativePath(f.toPath()).toString());
                 } else {
                     Log.log("Skipping file {}", relative);
                 }
