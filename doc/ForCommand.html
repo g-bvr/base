@@ -61,10 +61,12 @@ Execute a command for multiple items
 <table id="mytable1">
 <tr><th>Usage</th><th>Description</th></tr>
   <tr><td>FOR FILE filevar IN folder DO script</td><td>Execute the command for all files in specified folder</td></tr>
-  <tr><td>FOR SUBFOLDER foldervar IN folder DO script</td><td>Execute the command for all subfolders of specified folder</td></tr>
+  <tr><td>FOR FOLDER foldervar IN folder DO script</td><td>Execute the command for all subfolders of specified folder</td></tr>
+  <tr><td>FOR SUBFOLDER subfoldervar IN folder DO script</td><td>Execute the command for all subfolders of specified folder</td></tr>
   <tr><td>FOR LINE linevar IN file DO script</td><td>Execute the command for all lines of specified text file</td></tr>
   <tr><td>FOR FILE filevar IN folder MATCHING pattern DO script</td><td>Execute the command for all files in specified folder matching specified pattern</td></tr>
-  <tr><td>FOR SUBFOLDER foldervar IN folder MATCHING pattern DO script</td><td>Execute the command for all subfolders of specified folder matching specified pattern</td></tr>
+  <tr><td>FOR FOLDER foldervar IN folder MATCHING pattern DO script</td><td>Execute the command for all subfolders of specified folder matching specified pattern</td></tr>
+  <tr><td>FOR SUBFOLDER subfoldervar IN folder MATCHING pattern DO script</td><td>Execute the command for all subfolders of specified folder matching specified pattern</td></tr>
   <tr><td>FOR LINE linevar IN file MATCHING pattern DO script</td><td>Execute the command for all lines of specified text file matching specified pattern</td></tr>
 </table>
 
@@ -72,7 +74,8 @@ Execute a command for multiple items
 
 <table id="mytable2">
 <tr><th>Argument</th><th>Value</th></tr>
-  <tr><td>foldervar</td><td>the variable into the folder item (its path relative to the workspace) name shall be written</td></tr>
+  <tr><td>foldervar</td><td>the variable into the folder item (its path relative to the workspace) shall be written</td></tr>
+  <tr><td>subfoldervar</td><td>the variable into the folder item (its path relative containing folder) shall be written</td></tr>
   <tr><td>filevar</td><td>the variable into the file item (its path relative to the workspace) shall be written</td></tr>
   <tr><td>linevar</td><td>the variable into the line item shall be written</td></tr>
   <tr><td>file</td><td>the file from which lines shall be read</td></tr>
