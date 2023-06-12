@@ -15,6 +15,7 @@ public class BasePlugin extends SimplePlugin {
                 CopyCommand.class,
                 DebugCommand.class,
                 ExecuteCommand.class,
+                ExecuteSharingVariablesCommand.class,
                 ForCommand.class,
                 GitPullOrCloneCommand.class,
                 GitSimulateCloneCommand.class,
