@@ -3,14 +3,19 @@ package org.jkube.gitbeaver.base.command;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
+import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.util.FileUtil;
+import org.jkube.gitbeaver.util.VariableSubstitution;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.jkube.gitbeaver.CommandParser.REST;
 
 public class ForCommand extends AbstractCommand {
 
@@ -25,18 +30,18 @@ public class ForCommand extends AbstractCommand {
     private static final String FILE = "file";
     private static final String FOLDER = "folder";
     private static final String PATTERN = "pattern";
-    private static final String SCRIPT = "script";
+    private static final String DO = "DO"; // shortcut for EXECUTE, with extra logging the for item
 
     public ForCommand() {
         super("Execute a command for multiple items");
-        commandlineVariant("FOR FILE "+FILEVAR+" IN "+FOLDER+" DO "+SCRIPT, "Execute the command for all files in specified folder");
-        commandlineVariant("FOR FOLDER "+FOLDERVAR+" IN "+FOLDER+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder");
-        commandlineVariant("FOR SUBFOLDER "+SUBFOLDERVAR+" IN "+FOLDER+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder");
-        commandlineVariant("FOR LINE "+LINEVAR+" IN "+FILE+" DO "+SCRIPT, "Execute the command for all lines of specified text file");
-        commandlineVariant("FOR FILE "+FILEVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all files in specified folder matching specified pattern");
-        commandlineVariant("FOR FOLDER "+FOLDERVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder matching specified pattern");
-        commandlineVariant("FOR SUBFOLDER "+SUBFOLDERVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all subfolders of specified folder matching specified pattern");
-        commandlineVariant("FOR LINE "+LINEVAR+" IN "+FILE+" MATCHING "+PATTERN+" DO "+SCRIPT, "Execute the command for all lines of specified text file matching specified pattern");
+        commandlineVariant("FOR FILE "+FILEVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" "+REST, "Execute the command for all files in specified folder matching specified pattern");
+        commandlineVariant("FOR FOLDER "+FOLDERVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" "+REST, "Execute the command for all subfolders of specified folder matching specified pattern");
+        commandlineVariant("FOR SUBFOLDER "+SUBFOLDERVAR+" IN "+FOLDER+" MATCHING "+PATTERN+" "+REST, "Execute the command for all subfolders of specified folder matching specified pattern");
+        commandlineVariant("FOR LINE "+LINEVAR+" IN "+FILE+" MATCHING "+PATTERN+" "+REST, "Execute the command for all lines of specified text file matching specified pattern");
+        commandlineVariant("FOR FILE "+FILEVAR+" IN "+FOLDER+" "+REST, "Execute the command for all files in specified folder");
+        commandlineVariant("FOR FOLDER "+FOLDERVAR+" IN "+FOLDER+" "+REST, "Execute the command for all subfolders of specified folder");
+        commandlineVariant("FOR SUBFOLDER "+SUBFOLDERVAR+" IN "+FOLDER+" "+REST, "Execute the command for all subfolders of specified folder");
+        commandlineVariant("FOR LINE "+LINEVAR+" IN "+FILE+" "+REST, "Execute the command for all lines of specified text file");
         argument(FOLDERVAR, "the variable into the folder item (its path relative to the workspace) shall be written");
         argument(SUBFOLDERVAR, "the variable into the folder item (its path relative containing folder) shall be written");
         argument(FILEVAR, "the variable into the file item (its path relative to the workspace) shall be written");
@@ -44,7 +49,7 @@ public class ForCommand extends AbstractCommand {
         argument(FILE, "the file from which lines shall be read");
         argument(FOLDER, "the folder in which files/subfolders shall be listed");
         argument(PATTERN, "a regex expression by which the found items are filtered, the wildcard character # is resolved to [0-9]+ i.e. matches numbers");
-        argument(SCRIPT, "the script to be executed for each valid item");
+        argument(REST, "can be either 'DO script' to execute a script or any other command");
     }
 
     @Override
@@ -82,12 +87,26 @@ public class ForCommand extends AbstractCommand {
             case FOLDER -> readItemsInFolder(file, regex, true, workSpace);
             case SUBFOLDER -> readItemsInFolder(file, regex, true, null);
         };
-        String script = arguments.get(SCRIPT);
-        Expect.notNull(script).elseFail("");
+        String rest = arguments.get(REST);
+        Expect.notNull(rest).elseFail("no command to be executed was specified");
+        Consumer<String> executor;
+        if (rest.startsWith(DO)) {
+            String script = rest.substring(DO.length()).trim();
+            executor = item -> GitBeaver.scriptExecutor().execute(script, item, variables, workSpace);
+        } else {
+            String commandLine = arguments.get(REST);
+            executor = item -> {
+                Map<String, String> parsedArgs = new HashMap<>();
+                String substituted = VariableSubstitution.substituteVariables(commandLine, variables);
+                Log.log("executing loop command for "+item+": "+substituted);
+                Command command = GitBeaver.commandParser().parseCommand(substituted, parsedArgs);
+                command.execute(variables, workSpace, parsedArgs);
+            };
+        }
         String prevValue = variables.get(variable);
         for (String item : items) {
             variables.put(variable, item);
-            GitBeaver.scriptExecutor().execute(script, item, variables, workSpace);
+            executor.accept(item);
         }
         if (prevValue == null) {
             variables.remove(variable);

@@ -29,7 +29,7 @@ public class IfCommand extends AbstractCommand {
         commandlineVariant("IF NOT "+CONDITION+" EXECUTE "+SCRIPT2, "Execute a script if condition is not met");
         commandlineVariant("IF "+CONDITION+" EXECUTE "+SCRIPT1+" ELSE "+SCRIPT2, "Execute one of two scripts depending on condition");
         commandlineVariant("IF "+CONDITION+" SET "+VARIABLE+" TO "+VALUE1+" ELSE "+VALUE2, "Set variable to one of two values depending on condition");
-        commandlineVariant("IF "+CONDITION+" THEN *", "Execute a command if condition is met");
+        commandlineVariant("IF "+CONDITION+" THEN "+REST, "Execute a command if condition is met");
         argument(CONDITION, "a variable that holds the condition value. The 'ELSE' action is taken if the variable does not exist, is empty, or is one out of "+NO+", "+ZERO+", "+FALSE);
         argument(SCRIPT1, "the script that is to be execture if the condition is evaluated to true");
         argument(SCRIPT2, "the script that is to be execture if the condition is is evaluated to false");
@@ -64,7 +64,7 @@ public class IfCommand extends AbstractCommand {
 
     private void executeScript(String script, Map<String, String> variables, WorkSpace workSpace) {
         if (script != null) {
-            GitBeaver.scriptExecutor().execute(script, null, variables, workSpace, workSpace);
+            GitBeaver.scriptExecutor().executeNotSharingVariables(script, null, variables, workSpace, workSpace);
         }
     }
 

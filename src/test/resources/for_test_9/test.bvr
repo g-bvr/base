@@ -1,0 +1,2 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+FOR FILE file IN input APPEND $${file} TO output/result

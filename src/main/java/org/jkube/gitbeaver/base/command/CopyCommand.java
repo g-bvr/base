@@ -33,6 +33,7 @@ public class CopyCommand extends AbstractCommand {
         if (target.toFile().exists() && target.toFile().isDirectory() && !source.toFile().isDirectory()) {
             target = target.resolve(source.getFileName());
         }
+        FileUtil.deleteFileIfExists(target.toFile());
         FileUtil.copyTree(source, target);
     }
 

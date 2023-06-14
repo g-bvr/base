@@ -24,7 +24,7 @@ public class ExecuteCommand extends AbstractCommand {
         String script = arguments.get(SCRIPT);
         String folder = arguments.get(FOLDER);
         WorkSpace executionWorkspace = folder == null ? workSpace :  workSpace.getSubWorkspace(folder);
-        GitBeaver.scriptExecutor().execute(script, null, variables, workSpace, executionWorkspace);
+        GitBeaver.scriptExecutor().executeNotSharingVariables(script, null, variables, workSpace, executionWorkspace);
     }
 
 }

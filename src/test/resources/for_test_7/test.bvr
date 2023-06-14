@@ -1,2 +1,2 @@
 PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
-FOR SUBFOLDER folder IN input MATCHING folder# DO append
+FOR SUBFOLDER folder IN input MATCHING sub# DO append

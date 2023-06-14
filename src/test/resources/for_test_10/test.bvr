@@ -1,0 +1,4 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+FOR SUBFOLDER sub IN input EXECUTE setvar SHARING VARIABLES
+APPEND ${var-sub1} TO output/result
+APPEND ${var-sub2} TO output/result
