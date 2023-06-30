@@ -49,21 +49,15 @@ public class IfCommand extends AbstractCommand {
             value = value.trim();
         }
         boolean conditionFalse = (value == null) || value.isEmpty() || value.equals(ZERO) || value.equalsIgnoreCase(NO) || value.equalsIgnoreCase(FALSE);
-        System.out.println("Here: "+value+" --> "+conditionFalse+" "+arguments.containsKey(NOT_CONDITION));
         if ((arguments.containsKey(SCRIPT1) || arguments.containsKey(SCRIPT2))) {
-            System.out.println("AAAAAA");
             if (conditionFalse) {
-                System.out.println("Script2 "+SCRIPT2);
                 executeScript(arguments.get(SCRIPT2), variables, workSpace);
             } else {
-                System.out.println("Script1 "+SCRIPT1);
                 executeScript(arguments.get(SCRIPT1), variables, workSpace);
             }
         } else if (arguments.containsKey(VARIABLE)) {
-            System.out.println("BBBBB");
             variables.put(arguments.get(VARIABLE), arguments.get(conditionFalse ? VALUE2 : VALUE1));
         } else if (conditionFalse == arguments.containsKey(NOT_CONDITION)) {
-            System.out.println("=====================");
             Map<String, String> parsedArgs = new HashMap<>();
             GitBeaver.commandParser()
                     .parseCommand(arguments.get(REST), parsedArgs)
