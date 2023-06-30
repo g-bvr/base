@@ -23,7 +23,7 @@ public class EvaluateCommand extends AbstractCommand {
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
-        variables.put(arguments.get(VARIABLE), evaluate(arguments.get(REST).toString());
+        variables.put(arguments.get(VARIABLE), evaluate(arguments.get(REST)).toString());
 
     }
 
