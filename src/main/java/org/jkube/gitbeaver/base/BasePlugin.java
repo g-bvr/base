@@ -14,6 +14,7 @@ public class BasePlugin extends SimplePlugin {
                 CleanupCommand.class,
                 CopyCommand.class,
                 DebugCommand.class,
+                EvaluateCommand.class,
                 ExecuteCommand.class,
                 ExecuteSharingVariablesCommand.class,
                 ForCommand.class,
@@ -35,4 +36,5 @@ public class BasePlugin extends SimplePlugin {
                 StepStateCommand.class
         );
     }
+
 }
