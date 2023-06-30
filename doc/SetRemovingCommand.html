@@ -54,13 +54,13 @@ body {
 </head>
 <body>
 
-<h1 id="myheader">SetSubstitutedCommand</h1>
+<h1 id="myheader">SetRemovingCommand</h1>
 <h2>Purpose</h2>
 Set a variable to a value after applying a regex substitution
 <h2>Variants</h2>
 <table id="mytable1">
 <tr><th>Usage</th><th>Description</th></tr>
-  <tr><td>SET variable SUBSTITUTING regex BY substitute IN *</td><td>Set a variable to a value after applying a regex substitution</td></tr>
+  <tr><td>SET variable REMOVING regex IN *</td><td>Set a variable to a value after applying a regex substitution</td></tr>
 </table>
 
 <h2>Arguments</h2>
@@ -68,8 +68,7 @@ Set a variable to a value after applying a regex substitution
 <table id="mytable2">
 <tr><th>Argument</th><th>Value</th></tr>
   <tr><td>variable</td><td>name of the variable to be set</td></tr>
-  <tr><td>regex</td><td>regular expression to be replaced</td></tr>
-  <tr><td>substitute</td><td>string to be prelaces found places with</td></tr>
+  <tr><td>regex</td><td>regular expression to be removed</td></tr>
   <tr><td>*</td><td>input string</td></tr>
 </table>
 <h2>Plugin</h2>

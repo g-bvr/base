@@ -1,0 +1,3 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+IF NOT condition THEN SET var no
+APPEND ${var} TO output/result

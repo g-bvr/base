@@ -61,10 +61,11 @@ Branching statements, depending on a boolean condition
 <table id="mytable1">
 <tr><th>Usage</th><th>Description</th></tr>
   <tr><td>IF condition EXECUTE script1</td><td>Execute a script if condition is met</td></tr>
-  <tr><td>IF NOT condition EXECUTE script2</td><td>Execute a script if condition is not met</td></tr>
+  <tr><td>IF NOT notcondition EXECUTE script2</td><td>Execute a script if condition is not met</td></tr>
   <tr><td>IF condition EXECUTE script1 ELSE script2</td><td>Execute one of two scripts depending on condition</td></tr>
   <tr><td>IF condition SET variable TO value1 ELSE value2</td><td>Set variable to one of two values depending on condition</td></tr>
   <tr><td>IF condition THEN *</td><td>Execute a command if condition is met</td></tr>
+  <tr><td>IF NOT notcondition THEN *</td><td>Execute a command if condition is not met</td></tr>
 </table>
 
 <h2>Arguments</h2>
@@ -72,6 +73,7 @@ Branching statements, depending on a boolean condition
 <table id="mytable2">
 <tr><th>Argument</th><th>Value</th></tr>
   <tr><td>condition</td><td>a variable that holds the condition value. The 'ELSE' action is taken if the variable does not exist, is empty, or is one out of no, 0, false</td></tr>
+  <tr><td>notcondition</td><td>a variable that holds the condition value. The action is taken if the variable does not exist, is empty, or is one out of no, 0, false</td></tr>
   <tr><td>script1</td><td>the script that is to be execture if the condition is evaluated to true</td></tr>
   <tr><td>script2</td><td>the script that is to be execture if the condition is is evaluated to false</td></tr>
   <tr><td>value1</td><td>the value that is used if the condition is evaluated to true</td></tr>
