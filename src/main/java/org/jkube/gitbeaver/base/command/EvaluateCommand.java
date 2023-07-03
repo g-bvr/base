@@ -6,6 +6,7 @@ import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.util.Expect;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Map;
@@ -62,8 +63,8 @@ public class EvaluateCommand extends AbstractCommand {
         return now().getHour();
     }
 
-    private LocalTime now() {
-        return LocalTime.now(ZoneId.of(TIME_ZONE));
+    private LocalDateTime now() {
+        return LocalDateTime.now(ZoneId.of(TIME_ZONE));
     }
 
 }
