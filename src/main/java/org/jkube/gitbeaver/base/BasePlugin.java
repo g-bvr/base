@@ -28,6 +28,7 @@ public class BasePlugin extends SimplePlugin {
                 ReadOptionalMapCommand.class,
                 ReadVariablesCommand.class,
                 SetSubstitutingCommand.class,
+                SetLineInFileMatchingCommand.class,
                 SetRemovingCommand.class,
                 SetCommand.class,
                 SleepCommand.class,

@@ -1,0 +1,3 @@
+PLUGIN ENABLE org.jkube.gitbeaver.base.BasePlugin
+SET result FROM LINE IN input/file MATCHING .*:(.*)/.*
+APPEND ${result} TO output/result
