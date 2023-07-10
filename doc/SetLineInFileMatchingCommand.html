@@ -60,7 +60,7 @@ Set a variable to a value according to a line matching a regex with a group
 <h2>Variants</h2>
 <table id="mytable1">
 <tr><th>Usage</th><th>Description</th></tr>
-  <tr><td>SET variable FROM LINE IN file MATCHING regex</td><td>Set a variable to a value according to a line matching a regex with a group</td></tr>
+  <tr><td>SET variable FROM LINE IN file MATCHING *</td><td>Set a variable to a value according to a line matching a regex with a group</td></tr>
 </table>
 
 <h2>Arguments</h2>
@@ -68,8 +68,8 @@ Set a variable to a value according to a line matching a regex with a group
 <table id="mytable2">
 <tr><th>Argument</th><th>Value</th></tr>
   <tr><td>variable</td><td>name of the variable to be set</td></tr>
-  <tr><td>regex</td><td>regular expression with a group (in round brackets)</td></tr>
   <tr><td>file</td><td>text file in which regex is searched</td></tr>
+  <tr><td>*</td><td>regular expression with a group (in round brackets)</td></tr>
 </table>
 <h2>Plugin</h2>
 This command is defined in <a href="BasePlugin.html">BasePlugin</a>
