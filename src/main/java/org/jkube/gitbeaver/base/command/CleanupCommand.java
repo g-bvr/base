@@ -23,6 +23,7 @@ public class CleanupCommand extends AbstractCommand {
     public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
         Path absolute = workSpace.getAbsolutePath(arguments.get(FOLDER));
         Log.log("Cleaning directory "+absolute);
+        FileUtil.createIfNotExists(absolute);
         FileUtil.clear(absolute);
     }
 
