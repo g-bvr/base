@@ -11,6 +11,7 @@ public class BasePlugin extends SimplePlugin {
                         """,
                 AppendCommand.class,
                 AssembleCommand.class,
+                CatchCommand.class,
                 CleanupCommand.class,
                 CopyCommand.class,
                 DebugCommand.class,
