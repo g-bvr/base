@@ -1,6 +1,7 @@
 package org.jkube.gitbeaver.base.command;
 
 import org.jkube.gitbeaver.AbstractCommand;
+import org.jkube.gitbeaver.FailureHandler;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.FileUtil;
@@ -29,6 +30,7 @@ public class CatchCommand extends AbstractCommand {
         String script = arguments.get(SCRIPT);
         String command = arguments.get(REST);
         try {
+            FailureHandler.NUM_CATCHING_BLOCKS.incrementAndGet();
             Map<String, String> parsedArgs = new HashMap<>();
             GitBeaver.commandParser()
                     .parseCommand(arguments.get(REST), parsedArgs)
@@ -38,6 +40,8 @@ public class CatchCommand extends AbstractCommand {
             FileUtil.store(workSpace.getAbsolutePath("exception.txt"), t.getMessage());
             FileUtil.store(workSpace.getAbsolutePath("stacktrace.txt"), getStackTrace(t));
             GitBeaver.scriptExecutor().executeNotSharingVariables(script, null, variables, workSpace, workSpace);
+        } finally {
+            FailureHandler.NUM_CATCHING_BLOCKS.decrementAndGet();
         }
     }
 
