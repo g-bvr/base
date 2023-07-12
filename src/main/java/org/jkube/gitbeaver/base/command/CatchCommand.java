@@ -39,7 +39,7 @@ public class CatchCommand extends AbstractCommand {
             Log.warn("Exception was caught: "+t.getMessage());
             FileUtil.store(workSpace.getAbsolutePath("exception.txt"), t.getMessage());
             FileUtil.store(workSpace.getAbsolutePath("stacktrace.txt"), getStackTrace(t));
-            GitBeaver.scriptExecutor().executeNotSharingVariables(script, null, variables, workSpace, workSpace);
+            GitBeaver.scriptExecutor().executeSharingVariables(script, null, variables, workSpace, workSpace);
         } finally {
             FailureHandler.NUM_CATCHING_BLOCKS.decrementAndGet();
         }
