@@ -54,21 +54,21 @@ body {
 </head>
 <body>
 
-<h1 id="myheader">CatchCommand</h1>
+<h1 id="myheader">CheckFileExistsCommand</h1>
 <h2>Purpose</h2>
-Catch exceptions when executing a command, stacktrace and message will be written to files 'stacktrace.txt' and 'exception.txt' in current working directory
+Check if file exists and write result into a variable
 <h2>Variants</h2>
 <table id="mytable1">
 <tr><th>Usage</th><th>Description</th></tr>
-  <tr><td>CATCH IN script DO *</td><td>Catch exceptions when executing a command, stacktrace and message will be written to files 'stacktrace.txt' and 'exception.txt' in current working directory</td></tr>
+  <tr><td>CHECK FILE file EXISTS INTO VARIABLE variable</td><td>Check if file exists and write result into a variable</td></tr>
 </table>
 
 <h2>Arguments</h2>
 
 <table id="mytable2">
 <tr><th>Argument</th><th>Value</th></tr>
-  <tr><td>script</td><td>the script to be executed when an exception occurs</td></tr>
-  <tr><td>*</td><td>the command to be tried (from which occuring exceptions will be caught)</td></tr>
+  <tr><td>file</td><td>path to the file in current workspace</td></tr>
+  <tr><td>variable</td><td>name of the variable</td></tr>
 </table>
 <h2>Plugin</h2>
 This command is defined in <a href="BasePlugin.html">BasePlugin</a>
