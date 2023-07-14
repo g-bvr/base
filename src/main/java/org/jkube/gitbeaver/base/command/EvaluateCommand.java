@@ -7,14 +7,15 @@ import org.jkube.util.Expect;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import static org.jkube.gitbeaver.CommandParser.REST;
 
 public class EvaluateCommand extends AbstractCommand {
 
+    private final String CURRENT_UTC_TIME_STAMP = "CurrentUTCTimeStamp";
     private final String CURRENT_DAY_OF_WEEK = "CurrentDayOfWeek";
     private final String CURRENT_HOUR_OF_DAY = "CurrentHourOfDay";
 
@@ -51,6 +52,7 @@ public class EvaluateCommand extends AbstractCommand {
         return switch(name) {
             case CURRENT_DAY_OF_WEEK -> currentDayOfWeek();
             case CURRENT_HOUR_OF_DAY -> currentHourOfDay();
+            case CURRENT_UTC_TIME_STAMP -> currentUTCTimestamp();
             default -> Application.fail("Undefined function: " + name);
         };
     }
@@ -61,6 +63,10 @@ public class EvaluateCommand extends AbstractCommand {
 
     private int currentHourOfDay() {
         return now().getHour();
+    }
+
+    private String currentUTCTimestamp() {
+        return DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now(ZoneId.of("UTC")));
     }
 
     private LocalDateTime now() {
