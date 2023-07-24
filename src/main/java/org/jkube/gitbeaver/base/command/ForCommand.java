@@ -118,7 +118,8 @@ public class ForCommand extends AbstractCommand {
     private List<String> readLines(File file, Pattern regex) {
         return FileUtil.readLines(file.toPath())
                 .stream()
-                .filter(item -> regex.matcher(item).matches())
+                .map(String::trim)
+                .filter(line -> regex.matcher(line).matches())
                 .collect(Collectors.toList());
     }
 
