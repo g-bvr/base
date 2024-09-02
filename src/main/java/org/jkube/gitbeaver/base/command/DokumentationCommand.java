@@ -4,8 +4,8 @@ import org.jkube.gitbeaver.*;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.interfaces.Plugin;
 import org.jkube.gitbeaver.util.FileUtil;
-import org.jkube.logging.Log;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.logging.Log;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

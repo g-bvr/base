@@ -5,7 +5,7 @@ import org.jkube.gitbeaver.FailureHandler;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.FileUtil;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

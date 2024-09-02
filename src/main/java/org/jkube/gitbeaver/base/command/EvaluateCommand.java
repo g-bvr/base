@@ -1,9 +1,9 @@
 package org.jkube.gitbeaver.base.command;
 
-import org.jkube.application.Application;
+import org.jkube.gitbeaver.util.Application;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.WorkSpace;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;

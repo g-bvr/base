@@ -3,7 +3,7 @@ package org.jkube.gitbeaver.base.command;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.FileUtil;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.io.File;
 import java.util.Map;
