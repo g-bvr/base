@@ -24,7 +24,7 @@ public class ReadVariablesCommand extends AbstractCommand {
     public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
         Path path = workSpace.getAbsolutePath(arguments.get(FILE));
         List<String> lines = FileUtil.readLines(path);
-        Log.log("Read {} settings from {}", lines.size(), path);
+        Log.debug("Read {} settings from {}", lines.size(), path);
         lines.forEach(line -> addVariable(line, variables));
     }
 

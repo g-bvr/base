@@ -98,7 +98,7 @@ public class ForCommand extends AbstractCommand {
             executor = item -> {
                 Map<String, String> parsedArgs = new HashMap<>();
                 String substituted = VariableSubstitution.substituteVariables(commandLine, variables);
-                Log.log("executing loop command for "+item+": "+substituted);
+                Log.debug("executing loop command for "+item+": "+substituted);
                 Command command = GitBeaver.commandParser().parseCommand(substituted, parsedArgs);
                 command.execute(variables, workSpace, parsedArgs);
             };
@@ -130,10 +130,10 @@ public class ForCommand extends AbstractCommand {
             for (File f : files) {
                 String relative = f.toPath().getFileName().toString();
                 if ((f.isDirectory() == isDirectory) && regex.matcher(relative).matches()) {
-                    Log.log("Using file {}", relative);
+                    Log.debug("Using file {}", relative);
                     items.add(workSpace == null ? relative : workSpace.getRelativePath(f.toPath()).toString());
                 } else {
-                    Log.log("Skipping file {}", relative);
+                    Log.debug("Skipping file {}", relative);
                 }
             }
         }
