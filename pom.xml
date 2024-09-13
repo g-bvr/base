@@ -8,7 +8,7 @@
     <artifactId>gitbeaver-base</artifactId>
     <version>${gitbeaver.version}</version>
     <properties>
-        <gitbeaver.version>0.0.1</gitbeaver.version>
+        <gitbeaver.version>0.2.1</gitbeaver.version>
         <junit.version>5.5.2</junit.version>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>

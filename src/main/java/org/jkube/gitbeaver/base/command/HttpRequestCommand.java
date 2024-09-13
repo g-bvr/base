@@ -1,13 +1,13 @@
 package org.jkube.gitbeaver.base.command;
 
-import org.jkube.gitbeaver.util.Application;
+import org.jkube.gitbeaver.application.Application;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.ScriptExecutor;
 import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.FileUtil;
-import org.jkube.http.Http;
-import org.jkube.http.HttpSettings;
+import org.jkube.gitbeaver.http.Http;
+import org.jkube.gitbeaver.http.HttpSettings;
 import org.jkube.gitbeaver.logging.Log;
 import org.jkube.gitbeaver.util.Expect;
 

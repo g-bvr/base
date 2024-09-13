@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver.base.command;
 
-import org.jkube.gitbeaver.util.Application;
+import org.jkube.gitbeaver.application.Application;
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.util.Expect;
