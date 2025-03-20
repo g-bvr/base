@@ -4,7 +4,6 @@ import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.applicationlog.CombinedApplicationLoggers;
-import org.jkube.gitbeaver.applicationlog.DefaultLogConsole;
 import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.util.ExternalProcess;
 
@@ -37,14 +36,14 @@ public class GitPullOrCloneCommand extends AbstractCommand {
         URL url = onException(() -> new URL(urlString)).fail("Could not parse url "+urlString);
         CombinedApplicationLoggers applicationLogger = GitBeaver.getApplicationLogger(variables);
         if (workSpace.getAbsolutePath(repository).toFile().exists()) {
-            gitPull(workSpace.getAbsolutePath(repository), applicationLogger);
+            gitPull(workSpace.getAbsolutePath(repository), applicationLogger, variables);
         } else {
-            GitBeaver.gitCloner().clone(workSpace.getWorkdir(), url, repository, tag, applicationLogger);
+            GitBeaver.gitCloner().clone(workSpace.getWorkdir(), url, repository, tag, applicationLogger, variables);
         }
     }
 
-    public void gitPull(Path workdir, ApplicationLogger logger) {
-        new ExternalProcess()
+    public void gitPull(Path workdir, ApplicationLogger logger, Map<String, String> variables) {
+        new ExternalProcess(variables)
                 .command("git", "pull")
                 .dir(workdir)
                 .successMarker("Updated ")
