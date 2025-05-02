@@ -32,7 +32,7 @@ public class ForCommand extends AbstractCommand {
     private static final String FILE = "file";
     private static final String FOLDER = "folder";
     private static final String PATTERN = "pattern";
-    private static final String STRING = "string";
+    private static final String STRINGVALUE = "stringvalue";
     private static final String SEPARATOR = "separator";
     private static final String DO = "DO"; // shortcut for EXECUTE, with extra logging the for item
 
@@ -46,7 +46,7 @@ public class ForCommand extends AbstractCommand {
         commandlineVariant("FOR FOLDER "+FOLDERVAR+" IN "+FOLDER+" "+REST, "Execute the command for all subfolders of specified folder");
         commandlineVariant("FOR SUBFOLDER "+SUBFOLDERVAR+" IN "+FOLDER+" "+REST, "Execute the command for all subfolders of specified folder");
         commandlineVariant("FOR LINE "+LINEVAR+" IN "+FILE+" "+REST, "Execute the command for all lines of specified text file");
-        commandlineVariant("FOR SUBSTRING "+SUBSTRINGVAR+" IN "+STRING+" SPLIT BY "+SEPARATOR+" "+REST, "Execute the command for all comma separated pieces of specified string");
+        commandlineVariant("FOR SUBSTRING "+SUBSTRINGVAR+" IN "+STRINGVALUE+" SPLIT BY "+SEPARATOR+" "+REST, "Execute the command for all comma separated pieces of specified string");
         argument(FOLDERVAR, "the variable into the folder item (its path relative to the workspace) shall be written");
         argument(SUBFOLDERVAR, "the variable into the folder item (its path relative containing folder) shall be written");
         argument(FILEVAR, "the variable into the file item (its path relative to the workspace) shall be written");
@@ -55,7 +55,7 @@ public class ForCommand extends AbstractCommand {
         argument(FOLDER, "the folder in which files/subfolders shall be listed");
         argument(PATTERN, "a regex expression by which the found items are filtered, the wildcard character # is resolved to [0-9]+ i.e. matches numbers");
         argument(SUBSTRINGVAR, "the loop variable holding the current substring");
-        argument(STRING, "the string value that shall be split into substrings to loop over");
+        argument(STRINGVALUE, "the string value that shall be split into substrings to loop over");
         argument(SEPARATOR, "the string value that will serve as separator in splitting (e.g. ',')");
         argument(REST, "can be either 'DO script' to execute a script or any other command");
     }
@@ -85,7 +85,7 @@ public class ForCommand extends AbstractCommand {
             type = ForType.SUBFOLDER;
         } else if (arguments.containsKey(SUBSTRINGVAR)) {
             variable = arguments.get(SUBSTRINGVAR);
-            stringvalue = arguments.get(STRING);
+            stringvalue = arguments.get(STRINGVALUE);
             separatorvalue = arguments.get(SEPARATOR);
             type = ForType.FILE;
         } else {
