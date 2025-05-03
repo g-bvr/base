@@ -82,7 +82,7 @@ public class ForCommand extends AbstractCommand {
         } else if (arguments.containsKey(FILEVAR)) {
             variable = arguments.get(FILEVAR);
             filename = arguments.get(FOLDER);
-            type = ForType.SUBFOLDER;
+            type = ForType.FILE;
         } else if (arguments.containsKey(SUBSTRINGVAR)) {
             variable = arguments.get(SUBSTRINGVAR);
             stringvalue = arguments.get(STRINGVALUE);
