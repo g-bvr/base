@@ -58,6 +58,7 @@ public class ForCommand extends AbstractCommand {
         String filename;
         ForType type;
         System.out.println("I am here");
+        Log.log("I am here");
         if (arguments.containsKey(LINEVAR)) {
             variable = arguments.get(LINEVAR);
             filename = arguments.get(FILE);
