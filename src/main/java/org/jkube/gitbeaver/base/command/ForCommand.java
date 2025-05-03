@@ -115,10 +115,6 @@ public class ForCommand extends AbstractCommand {
         }
     }
 
-    private List<String> splitItemsInString(String stringvalue, String separatorvalue) {
-        return List.of(stringvalue.split(separatorvalue));
-    }
-
     private List<String> readLines(File file, Pattern regex) {
         return FileUtil.readLines(file.toPath())
                 .stream()
