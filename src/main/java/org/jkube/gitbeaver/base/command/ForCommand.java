@@ -81,6 +81,7 @@ public class ForCommand extends AbstractCommand {
         Pattern regex = createRegex(pattern);
         File file = workSpace.getAbsolutePath(filename).toFile();
         Expect.isTrue(file.exists()).elseFail("File does not exist: "+file);
+        System.out.println("File: "+file+" Regex: "+regex+" Type: "+type);
         List<String> items = switch (type) {
             case LINE -> readLines(file, regex);
             case FILE -> readItemsInFolder(file, regex, false, workSpace);
