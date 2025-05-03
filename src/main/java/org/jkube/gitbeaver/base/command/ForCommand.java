@@ -125,19 +125,23 @@ public class ForCommand extends AbstractCommand {
 
     private List<String> readItemsInFolder(File file, Pattern regex, boolean isDirectory, WorkSpace workSpace) {
         List<String> items = new ArrayList<>();
+        System.out.println("Listing files in "+file);
         File[] files = file.listFiles();
+        System.out.println("Found files: "+files);
+        System.out.println("Num Found files: "+files.length);
         if (files != null) {
             for (File f : files) {
                 String relative = f.toPath().getFileName().toString();
                 if ((f.isDirectory() == isDirectory) && regex.matcher(relative).matches()) {
-                    Log.debug("Using file {}", relative);
+                    Log.log("Using file {}", relative);
                     items.add(workSpace == null ? relative : workSpace.getRelativePath(f.toPath()).toString());
                 } else {
-                    Log.debug("Skipping file {}", relative);
+                    Log.log("Skipping file {}", relative);
                 }
             }
         }
         Collections.sort(items);
+        System.out.println("Items read: "+items);
         return items;
     }
 
