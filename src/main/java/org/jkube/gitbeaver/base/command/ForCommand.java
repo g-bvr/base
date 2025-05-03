@@ -87,7 +87,7 @@ public class ForCommand extends AbstractCommand {
             variable = arguments.get(SUBSTRINGVAR);
             stringvalue = arguments.get(STRINGVALUE);
             separatorvalue = arguments.get(SEPARATOR);
-            type = ForType.FILE;
+            type = ForType.SUBSTRING;
         } else {
             variable = null;
             type = null;
